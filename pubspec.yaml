@@ -1,5 +1,5 @@
 name: phototook
-description: "A new Flutter project."
+description: "Meta search engine for photos on the best image platforms and resources."
 publish_to: 'none'
 version: 0.1.0
 
@@ -17,3 +17,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/  
+    - assets/files/
+    - assets/fonts/
+    - assets/.env 
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+    - family: MajorMonoDisplay
+      fonts:
+        - asset: assets/fonts/MajorMonoDisplay-Regular.ttf
+
