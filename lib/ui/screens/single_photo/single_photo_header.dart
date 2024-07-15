@@ -1,14 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
+//import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../data/apis/unsplash/unsplash_download.dart';
 import '../../../data/models/photo.dart';
 import '../../../data/models/server.dart';
 import '../../../utils/consts.dart';
@@ -27,76 +22,6 @@ class SinglePhotoHeader extends StatelessWidget {
         SnackBar(content: Text('Could not launch $url')),
       );
     }
-  }
-
-  Future<void> downloadImage() async {
-    if (photo.linkDownload == null) {
-      showResultDownload(isResponseOk: false);
-      return;
-    }
-
-    String url = photo.linkDownload!;
-    if (photo.server == Server.unsplash) {
-      final client = Client();
-      final unsplashDownload = UnsplashDownload(id: photo.id);
-      if (unsplashDownload.authorization == false) {
-        print('autorizacion error');
-        return;
-      }
-
-      final response = await client.get(
-        unsplashDownload.uriDownload,
-        headers: unsplashDownload.headers,
-      );
-      if (response.statusCode != 200) {
-        print('status code error');
-        return;
-      }
-      try {
-        final download = Download.fromJson(json.decode(response.body));
-        url = download.url;
-      } catch (e) {
-        print(e.toString());
-        return;
-      } finally {
-        client.close();
-      }
-    }
-
-    Directory directory = Directory('');
-    if (Platform.isAndroid) {
-      directory = (await getExternalStorageDirectory() ??
-          await getApplicationDocumentsDirectory());
-    } else {
-      //directory = (await getApplicationCacheDirectory());
-      directory = (await getDownloadsDirectory() ??
-          await getApplicationDocumentsDirectory());
-    }
-    //String format = getFormat(url);
-    //String savePath = '${directory.path}/${photo.id}.$format';
-    String savePath = '${directory.path}/${photo.id}';
-    await Dio(BaseOptions(
-      connectTimeout: const Duration(seconds: 5),
-    ))
-        .download(url, savePath)
-        .then((value) => showResultDownload(
-              isResponseOk: true,
-              savePath: savePath,
-            ))
-        //.onError((handleError) => )
-        .catchError((error) => showResultDownload(isResponseOk: false));
-  }
-
-  void showResultDownload({bool? isResponseOk, String? savePath}) {
-    String content = 'Error downloading image';
-    if (isResponseOk == true) {
-      content = savePath != null
-          ? 'Image downloaded at $savePath'
-          : 'Download process aborted. The license may not support direct download';
-    }
-    globals.scaffoldMessengerKey.currentState!.showSnackBar(
-      SnackBar(content: Text(content)),
-    );
   }
 
   ImageProvider<Object> getAvatar(String url) {
@@ -170,14 +95,14 @@ class SinglePhotoHeader extends StatelessWidget {
           ],
         ),
       ),
-      trailing: ElevatedButton.icon(
+      /* trailing: ElevatedButton.icon(
         onPressed: downloadImage,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
         ),
         label: const Icon(Icons.file_download),
-      ),
+      ), */
     );
   }
 }
