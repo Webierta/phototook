@@ -19,7 +19,7 @@ import '../../../utils/local_storage.dart';
 import '../../states/filter_provider.dart';
 import '../../widgets/pop_menu.dart';
 import '../album/album_screen.dart';
-import '../full_photo/full_photo_screen.dart';
+import '../zoom_photo/zoom_photo_screen.dart';
 import 'single_photo_footer.dart';
 import 'single_photo_header.dart';
 
@@ -203,7 +203,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
         subject: 'Great picture',
       );
     }
-    print('resultado:${result.status}');
+    //print('resultado:${result.status}');
     if (result.status == ShareResultStatus.success) {
       //print('Thank you for sharing the picture!');
       //file?.delete();
@@ -266,7 +266,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    FullPhotoScreen(photo: photo),
+                                    ZoomPhotoScreen(photo: photo),
                               ),
                             );
                           },

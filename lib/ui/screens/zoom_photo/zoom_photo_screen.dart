@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../data/models/photo.dart';
 
-class FullPhotoScreen extends StatelessWidget {
+class ZoomPhotoScreen extends StatelessWidget {
   final Photo photo;
-  const FullPhotoScreen({super.key, required this.photo});
+  const ZoomPhotoScreen({super.key, required this.photo});
 
   @override
   Widget build(BuildContext context) {

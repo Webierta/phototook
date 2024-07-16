@@ -43,10 +43,29 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
   }
 
   Future<void> deleteAllFavorites() async {
-    final LocalStorage sharedPrefs = LocalStorage();
-    await sharedPrefs.init();
-    sharedPrefs.favoritesPhotos = [];
-    loadFavorites();
+    var confirmDelete = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Confirm delete'),
+        content: const Text('This will remove all favorites'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+    if (confirmDelete == true) {
+      final LocalStorage sharedPrefs = LocalStorage();
+      await sharedPrefs.init();
+      sharedPrefs.favoritesPhotos = [];
+      loadFavorites();
+    }
   }
 
   void changeCrossAxisCount() {
@@ -59,10 +78,11 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
       appBar: AppBar(
         title: const Text('Favorites'),
         actions: [
-          IconButton(
-            onPressed: deleteAllFavorites,
-            icon: const Icon(Icons.delete),
-          ),
+          if (photos.isNotEmpty)
+            IconButton(
+              onPressed: deleteAllFavorites,
+              icon: const Icon(Icons.delete),
+            ),
           IconButton(
             onPressed: changeCrossAxisCount,
             icon: const Icon(Icons.grid_view_sharp),

@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/models/photo.dart';
 import '../../../utils/globals.dart' as globals;
+import '../zoom_photo/zoom_photo_screen.dart';
 
 class SinglePhotoFooter extends StatelessWidget {
   final Photo photo;
@@ -111,7 +112,7 @@ class SinglePhotoFooter extends StatelessWidget {
                   builder: (BuildContext context) {
                     return Container(
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.only(left: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
                       height: 200,
                       child: SingleChildScrollView(
                         child: Wrap(
@@ -140,6 +141,17 @@ class SinglePhotoFooter extends StatelessWidget {
               },
               icon: const Icon(Icons.label),
             ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ZoomPhotoScreen(photo: photo),
+                ),
+              );
+            },
+            icon: const Icon(Icons.zoom_in),
+          )
         ],
       ),
     );
