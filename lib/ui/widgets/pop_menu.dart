@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../screens/about/about_screen.dart';
+import '../screens/favorites/favorites_screen.dart';
 import '../screens/info/info_screen.dart';
 import '../screens/settings/settings_screen.dart';
 
 enum OptionScreen {
+  favorites('Favorites', Icons.favorite, FavoritesScreen()),
   settings('Settings', Icons.settings, SettingsScreen()),
   info('Info', Icons.info, InfoScreen()),
   about('About', Icons.code, AboutScreen());

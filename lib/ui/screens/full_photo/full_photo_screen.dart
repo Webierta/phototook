@@ -30,9 +30,12 @@ class FullPhotoScreen extends StatelessWidget {
             ),
           ),
           Positioned(
+            left: 14,
             child: IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.close),
+              icon: const CircleAvatar(
+                child: Icon(Icons.close),
+              ),
             ),
           ),
         ],

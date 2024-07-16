@@ -59,7 +59,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
     final querySent = QuerySent(query: query, page: 1, filter: filter);
     await RequestApi(querySent: querySent)
         .searchPhotos
-        .then((List<Photo> fotos) {
+        .then((List<Photo> fotos) async {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) =>
