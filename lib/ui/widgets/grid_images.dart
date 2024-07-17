@@ -8,6 +8,7 @@ import '../../data/models/photo.dart';
 import '../../utils/local_storage.dart';
 import '../screens/single_photo/single_photo_screen.dart';
 import '../states/filter_provider.dart';
+import 'cached_image.dart';
 
 class GridImages extends ConsumerStatefulWidget {
   final List<Photo> photos;
@@ -97,36 +98,11 @@ class GridImagesState extends ConsumerState<GridImages> {
           itemCount: photos.length,
           itemBuilder: (context, index) {
             final photo = photos[index];
-            final image = FastCachedImage(
-              key: Key(photo.id),
-              url: photo.url,
+            final image = CachedImage(
+              photo: photo,
               fit: BoxFit.cover,
-              loadingBuilder: (context, progress) {
-                return Container(
-                  color: Colors.white70,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      if (progress.isDownloading && progress.totalBytes != null)
-                        Text(
-                          '${progress.downloadedBytes ~/ 1024} / ${progress.totalBytes! ~/ 1024} kb',
-                          style: const TextStyle(
-                            color: Colors.white30,
-                          ),
-                        ),
-                      CircularProgressIndicator(
-                        color: Colors.white30,
-                        value: progress.progressPercentage.value,
-                      ),
-                    ],
-                  ),
-                );
-              },
-              errorBuilder: (context, exception, stacktrace) {
-                return const Icon(Icons.image_not_supported);
-              },
             );
-            return GestureDetector(
+            return InkWell(
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

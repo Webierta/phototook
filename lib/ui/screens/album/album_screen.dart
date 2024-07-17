@@ -5,6 +5,7 @@ import '../../../data/models/photo.dart';
 import '../../../data/models/query_sent.dart';
 import '../../../data/models/request_api.dart';
 import '../../states/grid_columns_provider.dart';
+import '../../widgets/card_view.dart';
 import '../../widgets/grid_images.dart';
 import '../../widgets/no_images.dart';
 import '../../widgets/pop_menu.dart';
@@ -28,6 +29,7 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
   int page = 1;
   bool isLastPage = false;
   bool isLoading = false;
+  bool isViewGrid = true;
 
   @override
   void initState() {
@@ -37,26 +39,37 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
     super.initState();
   }
 
+  void changeViewMode() {
+    setState(() => isViewGrid = !isViewGrid);
+  }
+
   void changeCrossAxisCount() {
     ref.read(gridColumnsProvider.notifier).change();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.querySent.query),
         actions: [
+          if (isViewGrid)
+            IconButton(
+              onPressed: changeCrossAxisCount,
+              icon: const Icon(Icons.view_module),
+            ),
           IconButton(
-            onPressed: changeCrossAxisCount,
-            icon: const Icon(Icons.grid_view_sharp),
+            onPressed: changeViewMode,
+            icon: const Icon(Icons.view_list),
           ),
           const PopMenu(),
         ],
       ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : photos.isNotEmpty
+      body: photos.isNotEmpty
+          ? isViewGrid
               ? Stack(
                   alignment: Alignment.center,
                   children: [
@@ -97,7 +110,8 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
                     ),
                   ],
                 )
-              : const NoImages(message: 'Images not found'),
+              : CardView(photos: photos)
+          : const NoImages(message: 'Images not found'),
     );
   }
 

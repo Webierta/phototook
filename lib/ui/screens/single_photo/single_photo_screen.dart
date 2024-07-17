@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
@@ -17,6 +16,7 @@ import '../../../data/models/server.dart';
 import '../../../utils/globals.dart' as globals;
 import '../../../utils/local_storage.dart';
 import '../../states/filter_provider.dart';
+import '../../widgets/cached_image.dart';
 import '../../widgets/pop_menu.dart';
 import '../album/album_screen.dart';
 import '../zoom_photo/zoom_photo_screen.dart';
@@ -240,115 +240,88 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     Photo photo = widget.photo;
-    return isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Stack(
-            children: [
-              Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    photo.title ?? 'No Title',
-                    maxLines: 1,
-                    overflow: TextOverflow.fade,
-                  ),
-                  actions: const [PopMenu()],
-                ),
-                body: SafeArea(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SinglePhotoHeader(photo: photo),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ZoomPhotoScreen(photo: photo),
-                              ),
-                            );
-                          },
-                          child: FastCachedImage(
-                            url: photo.url,
-                            width: double.infinity,
-                            fit: BoxFit.contain,
-                            errorBuilder: (context, exception, stacktrace) {
-                              return LayoutBuilder(
-                                  builder: (context, constraint) {
-                                return SizedBox(
-                                  height: constraint.biggest.height,
-                                  child: Column(
-                                    children: [
-                                      const Spacer(),
-                                      Text(
-                                        'Image not found',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall,
-                                      ),
-                                      Expanded(
-                                        child: Icon(
-                                          Icons.image_not_supported,
-                                          size: constraint.maxHeight / 2,
-                                        ),
-                                      ),
-                                      const Spacer(flex: 2),
-                                    ],
-                                  ),
-                                );
-                              });
-                            },
-                          ),
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            title: Text(
+              photo.title ?? 'No Title',
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+            ),
+            actions: const [PopMenu()],
+          ),
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SinglePhotoHeader(photo: photo),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ZoomPhotoScreen(photo: photo),
                         ),
-                      ),
-                      //const SizedBox(height: 4),
-                    ],
+                      );
+                    },
+                    child: CachedImage(
+                      photo: photo,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
-                bottomNavigationBar: Hero(
-                  tag: 'Bottom Bar',
-                  child: SinglePhotoFooter(
-                    photo: photo,
-                    searchQuery: searchQuery,
-                  ),
-                ),
+                //const SizedBox(height: 4),
+              ],
+            ),
+          ),
+          bottomNavigationBar: Hero(
+            tag: 'Bottom Bar',
+            child: SinglePhotoFooter(
+              photo: photo,
+              searchQuery: searchQuery,
+            ),
+          ),
+        ),
+        Positioned(
+          right: 14,
+          bottom: 25,
+          child: Row(
+            children: [
+              FloatingActionButton.small(
+                heroTag: null,
+                onPressed: favoriteImage,
+                shape: const CircleBorder(),
+                child: isFavorite
+                    ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : const Icon(Icons.favorite_outline),
               ),
-              Positioned(
-                right: 14,
-                bottom: 25,
-                child: Row(
-                  children: [
-                    FloatingActionButton.small(
-                      heroTag: null,
-                      onPressed: favoriteImage,
-                      shape: const CircleBorder(),
-                      child: isFavorite
-                          ? const Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            )
-                          : const Icon(Icons.favorite_outline),
-                    ),
-                    const SizedBox(width: 12),
-                    FloatingActionButton.small(
-                      heroTag: null,
-                      onPressed: downloadImage,
-                      shape: const CircleBorder(),
-                      child: const Icon(Icons.download),
-                    ),
-                    const SizedBox(width: 12),
-                    FloatingActionButton.small(
-                      heroTag: null,
-                      onPressed: shareImage,
-                      shape: const CircleBorder(),
-                      child: const Icon(Icons.share),
-                    ),
-                  ],
-                ),
+              const SizedBox(width: 12),
+              FloatingActionButton.small(
+                heroTag: null,
+                onPressed: downloadImage,
+                shape: const CircleBorder(),
+                child: const Icon(Icons.download),
+              ),
+              const SizedBox(width: 12),
+              FloatingActionButton.small(
+                heroTag: null,
+                onPressed: shareImage,
+                shape: const CircleBorder(),
+                child: const Icon(Icons.share),
               ),
             ],
-          );
+          ),
+        ),
+      ],
+    );
   }
 }

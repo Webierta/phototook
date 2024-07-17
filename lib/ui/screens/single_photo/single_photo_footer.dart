@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/models/photo.dart';
-import '../../../utils/globals.dart' as globals;
+import '../../widgets/show_info.dart';
 import '../zoom_photo/zoom_photo_screen.dart';
 
 class SinglePhotoFooter extends StatelessWidget {
@@ -10,16 +9,6 @@ class SinglePhotoFooter extends StatelessWidget {
   final Function(String) searchQuery;
   const SinglePhotoFooter(
       {super.key, required this.photo, required this.searchQuery});
-
-  Future<void> _launchUrl(String url) async {
-    //const String utmParameters = '?utm_source=$appName&utm_medium=referral';
-    //Uri uri = Uri.parse(photo.server == Server.unsplash ? '$url$utmParameters' : url);
-    if (!await launchUrl(Uri.parse(url))) {
-      globals.scaffoldMessengerKey.currentState!.showSnackBar(
-        SnackBar(content: Text('Could not launch $url')),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +30,13 @@ class SinglePhotoFooter extends StatelessWidget {
                   maxWidth: MediaQuery.of(context).size.width,
                 ),
                 builder: (BuildContext context) {
+                  showInfo(InfoAttribute attribute) => ShowInfo(
+                        photo: photo,
+                        attribute: attribute,
+                        searchQuery: attribute == InfoAttribute.tags
+                            ? searchQuery
+                            : null,
+                      );
                   return Container(
                     padding: const EdgeInsets.all(12),
                     height: 200,
@@ -49,49 +45,11 @@ class SinglePhotoFooter extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (photo.link != null &&
-                              photo.link!.trim().isNotEmpty)
-                            ListTile(
-                              dense: true,
-                              leading: const Icon(Icons.link),
-                              title: InkWell(
-                                onTap: () => _launchUrl(photo.link!),
-                                child: Text(
-                                  (photo.source != null &&
-                                          photo.source!.isNotEmpty)
-                                      ? 'Website (source: ${photo.source!.toUpperCase()})'
-                                      : 'Website',
-                                  style: const TextStyle(color: Colors.blue),
-                                ),
-                              ),
-                            ),
-                          if (photo.title != null &&
-                              photo.title!.trim().isNotEmpty)
-                            ListTile(
-                              dense: true,
-                              leading: const Icon(Icons.title),
-                              title: Text(photo.title!),
-                            ),
-                          if (photo.description != null &&
-                              photo.description!.trim().isNotEmpty &&
-                              photo.description != photo.title)
-                            ListTile(
-                              dense: true,
-                              leading: const Icon(Icons.message),
-                              title: Text(photo.description!),
-                            ),
-                          ListTile(
-                            dense: true,
-                            leading: const Icon(Icons.photo_size_select_large),
-                            title: Text(
-                                'Original Size: W ${photo.width} x H ${photo.height} px'),
-                          ),
-                          if (photo.license != null)
-                            ListTile(
-                              dense: true,
-                              leading: const Icon(Icons.security),
-                              title: Text('License: ${photo.license}'),
-                            ),
+                          showInfo(InfoAttribute.link),
+                          showInfo(InfoAttribute.title),
+                          showInfo(InfoAttribute.description),
+                          showInfo(InfoAttribute.size),
+                          showInfo(InfoAttribute.license),
                         ],
                       ),
                     ),

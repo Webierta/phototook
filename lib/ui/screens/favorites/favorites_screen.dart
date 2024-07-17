@@ -7,6 +7,7 @@ import '../../../data/models/favorite.dart';
 import '../../../data/models/photo.dart';
 import '../../../utils/local_storage.dart';
 import '../../states/grid_columns_provider.dart';
+import '../../widgets/card_view.dart';
 import '../../widgets/grid_images.dart';
 import '../../widgets/no_images.dart';
 import '../../widgets/pop_menu.dart';
@@ -21,11 +22,16 @@ class FavoritesScreen extends ConsumerStatefulWidget {
 class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
   List<Photo> photos = [];
   bool isLoading = false;
+  bool isViewGrid = true;
 
   @override
   void initState() {
     loadFavorites();
     super.initState();
+  }
+
+  void changeViewMode() {
+    setState(() => isViewGrid = !isViewGrid);
   }
 
   Future<void> loadFavorites() async {
@@ -74,27 +80,35 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
         actions: [
+          if (isViewGrid)
+            IconButton(
+              onPressed: changeCrossAxisCount,
+              icon: const Icon(Icons.view_module),
+            ),
+          IconButton(
+            onPressed: changeViewMode,
+            icon: const Icon(Icons.view_list),
+          ),
           if (photos.isNotEmpty)
             IconButton(
               onPressed: deleteAllFavorites,
               icon: const Icon(Icons.delete),
             ),
-          IconButton(
-            onPressed: changeCrossAxisCount,
-            icon: const Icon(Icons.grid_view_sharp),
-          ),
           const PopMenu(),
         ],
       ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : photos.isNotEmpty
+      body: photos.isNotEmpty
+          ? isViewGrid
               ? GridImages(photos: photos)
-              : const NoImages(message: 'There are no favorites'),
+              : CardView(photos: photos)
+          : const NoImages(message: 'There are no favorites'),
     );
   }
 }
