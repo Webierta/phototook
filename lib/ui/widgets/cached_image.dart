@@ -20,24 +20,21 @@ class CachedImage extends StatelessWidget {
       width: double.infinity, // ??
       fit: fit,
       loadingBuilder: (context, progress) {
-        return Container(
-          color: Colors.white70,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              if (progress.isDownloading && progress.totalBytes != null)
-                Text(
-                  '${progress.downloadedBytes ~/ 1024} / ${progress.totalBytes! ~/ 1024} kb',
-                  style: const TextStyle(
-                    color: Colors.white30,
-                  ),
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            if (progress.isDownloading && progress.totalBytes != null)
+              Text(
+                '${progress.downloadedBytes ~/ 1024} / ${progress.totalBytes! ~/ 1024} kb',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
-              CircularProgressIndicator(
-                color: Colors.white30,
-                value: progress.progressPercentage.value,
               ),
-            ],
-          ),
+            CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.secondary,
+              value: progress.progressPercentage.value,
+            ),
+          ],
         );
       },
       /* errorBuilder: (context, exception, stacktrace) {

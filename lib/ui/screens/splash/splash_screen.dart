@@ -84,6 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             style: TextStyle(
                               fontFamily: fontLogo,
                               fontSize: 40,
+                              color: Colors.white,
                             ),
                             key: ValueKey<int>(3),
                           ),

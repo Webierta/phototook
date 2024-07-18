@@ -114,7 +114,7 @@ class ShowInfo extends StatelessWidget {
       return ListTile(
         dense: true,
         leading: const Icon(Icons.link),
-        title: InkWell(
+        title: GestureDetector(
           onTap: () => _launchUrl(photo.link!),
           child: Text(
             (photo.source != null && photo.source!.isNotEmpty)
@@ -175,7 +175,7 @@ class ShowInfo extends StatelessWidget {
               label: Text(tag),
               labelStyle: Theme.of(context).textTheme.labelSmall,
               //!.copyWith(color: Theme.of(context).colorScheme.secondary),
-              labelPadding: const EdgeInsets.all(4),
+              //labelPadding: const EdgeInsets.all(4),
               padding: const EdgeInsets.all(0),
               onPressed: () async {
                 searchQuery!(tag);

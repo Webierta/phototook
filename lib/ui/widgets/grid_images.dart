@@ -1,4 +1,3 @@
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phototook/ui/states/grid_columns_provider.dart';
@@ -26,7 +25,6 @@ class GridImagesState extends ConsumerState<GridImages> {
 
   @override
   void initState() {
-    fetchImagesFromAPI();
     loadSharedPrefs();
     super.initState();
   }
@@ -43,34 +41,6 @@ class GridImagesState extends ConsumerState<GridImages> {
     setState(() {
       crossAxisCount = sharedPrefs.albumColumns;
     });
-  }
-
-  Future<void> fetchImagesFromAPI() async {
-    Map<String, String> mapIdUrl = {};
-    for (var photo in widget.photos) {
-      if (photo.id.trim().isNotEmpty && photo.url.trim().isNotEmpty) {
-        mapIdUrl[photo.id] = photo.url;
-      }
-    }
-    if (widget.photos.isNotEmpty &&
-        widget.photos.length == mapIdUrl.entries.length) {
-      await downloadImagesToCache(mapIdUrl);
-      //compute(downloadImagesToCache, mapIdUrl);
-    } // ELSE ERROR
-    //setState(() => isLoading = false);
-  }
-
-  Future<void> downloadImagesToCache(Map<String, String> mapIdUrl) async {
-    await Future.forEach(mapIdUrl.entries, (entry) async {
-      bool fileExists = FastCachedImageConfig.isCached(imageUrl: entry.value);
-      if (!fileExists) {
-        try {
-          FastCachedImage(url: entry.value, key: Key(entry.key));
-        } catch (e) {
-          //print('Error in downloading image $e');
-        }
-      }
-    }).timeout(const Duration(seconds: 10));
   }
 
   @override
@@ -102,7 +72,7 @@ class GridImagesState extends ConsumerState<GridImages> {
               photo: photo,
               fit: BoxFit.cover,
             );
-            return InkWell(
+            return GestureDetector(
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

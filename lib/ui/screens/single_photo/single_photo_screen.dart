@@ -18,10 +18,10 @@ import '../../../utils/local_storage.dart';
 import '../../states/filter_provider.dart';
 import '../../widgets/cached_image.dart';
 import '../../widgets/pop_menu.dart';
+import '../../widgets/show_info.dart';
 import '../album/album_screen.dart';
 import '../zoom_photo/zoom_photo_screen.dart';
 import 'single_photo_footer.dart';
-import 'single_photo_header.dart';
 
 class SinglePhotoScreen extends ConsumerStatefulWidget {
   final Photo photo;
@@ -259,7 +259,10 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SinglePhotoHeader(photo: photo),
+                ShowInfo(
+                  photo: photo,
+                  attribute: InfoAttribute.author,
+                ),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {

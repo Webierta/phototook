@@ -1,4 +1,3 @@
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,40 +21,6 @@ class CardView extends ConsumerStatefulWidget {
 
 class CardViewState extends ConsumerState<CardView> {
   bool isLoading = false;
-
-  @override
-  void initState() {
-    fetchImagesFromAPI();
-    super.initState();
-  }
-
-  Future<void> fetchImagesFromAPI() async {
-    Map<String, String> mapIdUrl = {};
-    for (var photo in widget.photos) {
-      if (photo.id.trim().isNotEmpty && photo.url.trim().isNotEmpty) {
-        mapIdUrl[photo.id] = photo.url;
-      }
-    }
-    if (widget.photos.isNotEmpty &&
-        widget.photos.length == mapIdUrl.entries.length) {
-      await downloadImagesToCache(mapIdUrl);
-      //compute(downloadImagesToCache, mapIdUrl);
-    } // ELSE ERROR
-    //setState(() => isLoading = false);
-  }
-
-  Future<void> downloadImagesToCache(Map<String, String> mapIdUrl) async {
-    await Future.forEach(mapIdUrl.entries, (entry) async {
-      bool fileExists = FastCachedImageConfig.isCached(imageUrl: entry.value);
-      if (!fileExists) {
-        try {
-          FastCachedImage(url: entry.value, key: Key(entry.key));
-        } catch (e) {
-          //print('Error in downloading image $e');
-        }
-      }
-    }).timeout(const Duration(seconds: 10));
-  }
 
   Future<void> searchQuery(String query) async {
     if (query.trim().isEmpty) {
@@ -114,7 +79,7 @@ class CardViewState extends ConsumerState<CardView> {
                     flex: 2,
                     child: SizedBox(
                       height: double.infinity,
-                      child: InkWell(
+                      child: GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
