@@ -1,4 +1,4 @@
-import '../utils/consts.dart';
+import '../../../utils/consts.dart';
 
 const String urlPayPal =
     'https://www.paypal.com/donate?hosted_button_id=986PSAHLH6N4L';
@@ -6,7 +6,7 @@ const String urlGitHub = 'https://github.com/Webierta/phototook';
 const String urlGitHubIssues = 'https://github.com/Webierta/phototook/issues';
 
 class MarkdownAbout {
-  static String en1 = """
+  static const String en1 = """
 # PhoToTook
 
 #### META SEARCH ENGINE FOR PHOTOS ON THE BEST IMAGES PLATFORMS
@@ -15,11 +15,11 @@ class MarkdownAbout {
 
 **PhotoTook** searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.
 
-The app accesses photos from the platforms through their API and has no official relationship with any of them.
+The app accesses photos from the platforms through their API and has no official relationship with any of them. Each platform owns its registered trademark and logo and this application is not sponsored or supported by any.
 
-The app allows you to use some filters to search for photos, such as predominant color and orientation, although not all platforms support filters.
+The app allows you to use some filters to search for photos, such as predominant color and orientation, although not all platforms support this filters.
 
-The application presents the images and associated information in different layouts and allows you to save images as favorites.
+The application displays the images and associated information in different layouts, and allows some actions on the images: bookmark, zoom, share and download on your device.
 
 ## Author and License
 
@@ -48,7 +48,7 @@ or copy my BTC wallet address:
 
 """;
 
-  static String en2 = """
+  static const String en2 = """
 
 ---
 
@@ -66,11 +66,11 @@ It cannot be guaranteed that the content offered is free of errors, whether erro
 
 ### Images:
 
-* Imagen en pantalla de inicio de [Lisa Fotios](https://www.pexels.com/es-es/foto/persona-con-foto-de-un-solo-arbol-durante-el-dia-1252983/) on Pexels.
+* Home screen image of [Lisa Fotios](https://www.pexels.com/es-es/foto/persona-con-foto-de-un-solo-arbol-durante-el-dia-1252983/) on Pexels.
 
-* GIFs de [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613).
+* GIFs of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613).
 
-* GIFs de [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592).
+* GIFs of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592).
 
 ### Fonts:
 

@@ -186,7 +186,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
                                         style: TextStyle(color: Colors.black87),
                                       ),
                                       icon: const Icon(
-                                        Icons.filter_alt,
+                                        Icons.tune,
                                         color: Colors.black87,
                                       ),
                                     ),

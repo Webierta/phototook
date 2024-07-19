@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../l10n/markdown_about.dart';
 import '../../styles/styles_app.dart';
 import 'btc_wallet_address.dart';
+import 'markdown_about.dart';
 import 'markdown_text.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -25,14 +25,14 @@ class _AboutScreenState extends State<AboutScreen> {
           backgroundColor: Colors.transparent,
           title: const Text('About'),
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   MarkdownText(data: MarkdownAbout.en1),
-                  const BtcWalletAddress(),
+                  BtcWalletAddress(),
                   MarkdownText(data: MarkdownAbout.en2),
                 ],
               ),

@@ -87,8 +87,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: const Text('Settings'),
-          actions: [
-            /* IconButton(
+          /* actions: [
+             IconButton(
               onPressed: () {
                 ref.read(settingsProvider.notifier).setSettings(Settings(
                     isDarkTheme: isDarkTheme, albumColumns: albumColumns));
@@ -96,8 +96,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                 sharedPrefs.albumColumns = albumColumns;
               },
               icon: const CircleAvatar(child: Icon(Icons.save)),
-            ) */
-            Padding(
+            ) 
+            /*  Padding(
               padding: const EdgeInsets.only(right: 14),
               child: OutlinedButton.icon(
                 onPressed: () {
@@ -110,108 +110,152 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                 icon: const Icon(Icons.save),
                 label: const Text('Save'),
               ),
-            )
-          ],
+            ) */
+          ], */
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const ListTile(
-                title: Text('Language'),
-                trailing: CircleAvatar(child: Text('EN')),
-              ),
-              const Divider(height: 24),
-              SwitchListTile(
-                title: const Text('Theme'),
-                secondary: CircleAvatar(
-                  child: Icon(
-                    isDarkTheme ? Icons.dark_mode : Icons.light_mode,
-                  ),
-                ),
-                value: isDarkTheme,
-                onChanged: (val) {
-                  ref.read(settingsProvider.notifier).setSettings(Settings(
-                        isDarkTheme: val,
-                        albumColumns: albumColumns,
-                      ));
-                  /* setState(() {
-                    isDarkTheme = val;
-                  }); */
-                },
-              ),
-              const Divider(height: 24),
-              ListTile(
-                title: const Text('Columns on results page'),
-                subtitle: Slider(
-                  value: albumColumns.toDouble(),
-                  min: 1,
-                  max: 6,
-                  divisions: 5,
-                  label: '$albumColumns',
-                  onChanged: (double value) {
-                    /*  setState(() {
-                      albumColumns = value.round();
-                    }); */
-                    ref.read(gridColumnsProvider.notifier).fit(value.toInt());
-                    ref.read(settingsProvider.notifier).setSettings(Settings(
-                        isDarkTheme: isDarkTheme, albumColumns: value.toInt()));
-                  },
-                ),
-                trailing: CircleAvatar(
-                  child: Text('$albumColumns'),
-                ),
-              ),
-              const Divider(height: 24),
-              ListTile(
-                title: const Text('Delete cache of displayed images'),
-                subtitle: Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
-                trailing: CircleAvatar(
-                  child: IconButton(
-                    onPressed: () async {
-                      await FastCachedImageConfig.clearAllCachedImages();
-                      setState(() => sizeCacheImages = 0);
-                      globals.scaffoldMessengerKey.currentState!.showSnackBar(
-                        const SnackBar(
-                          content: Text('Cache of displayed images deleted'),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    const ListTile(
+                      title: Text('Language'),
+                      trailing: CircleAvatar(child: Text('EN')),
+                    ),
+                    const Divider(height: 24),
+                    SwitchListTile(
+                      title: const Text('Theme'),
+                      secondary: CircleAvatar(
+                        child: Icon(
+                          isDarkTheme ? Icons.dark_mode : Icons.light_mode,
                         ),
-                      );
-                    },
-                    icon: const Icon(Icons.delete_forever),
-                  ),
-                ),
-              ),
-              const Divider(height: 24),
-              ListTile(
-                title: const Text('Delete cache of shared images'),
-                subtitle: Text('Size: ${formatBytes(bytes: sizeCacheShared)}'),
-                trailing: CircleAvatar(
-                  child: IconButton(
-                    onPressed: () async {
-                      final cacheDir = await getApplicationCacheDirectory();
-                      if (cacheDir.existsSync()) {
-                        //cacheDir.deleteSync(recursive: true);
-                        for (var file in cacheDir.listSync()) {
-                          if (!file.path.endsWith('.hive') &&
-                              !file.path.endsWith('.lock')) {
-                            file.delete();
-                          }
-                        }
-                        setState(() => sizeCacheShared = 0);
-                      }
-                      //cacheDir.create();
-                      globals.scaffoldMessengerKey.currentState!.showSnackBar(
-                        const SnackBar(
-                          content: Text('Cache of shared images deleted'),
+                      ),
+                      value: isDarkTheme,
+                      onChanged: (val) {
+                        ref
+                            .read(settingsProvider.notifier)
+                            .setSettings(Settings(
+                              isDarkTheme: val,
+                              albumColumns: albumColumns,
+                            ));
+                        /* setState(() {
+                          isDarkTheme = val;
+                        }); */
+                      },
+                    ),
+                    const Divider(height: 24),
+                    ListTile(
+                      title: const Text('Columns on results page'),
+                      subtitle: Slider(
+                        value: albumColumns.toDouble(),
+                        min: 1,
+                        max: 6,
+                        divisions: 5,
+                        label: '$albumColumns',
+                        onChanged: (double value) {
+                          /*  setState(() {
+                            albumColumns = value.round();
+                          }); */
+                          ref
+                              .read(gridColumnsProvider.notifier)
+                              .fit(value.toInt());
+                          ref.read(settingsProvider.notifier).setSettings(
+                              Settings(
+                                  isDarkTheme: isDarkTheme,
+                                  albumColumns: value.toInt()));
+                        },
+                      ),
+                      trailing: CircleAvatar(
+                        child: Text('$albumColumns'),
+                      ),
+                    ),
+                    const Divider(height: 24),
+                    ListTile(
+                      title: const Text('Delete cache of displayed images'),
+                      subtitle:
+                          Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
+                      trailing: CircleAvatar(
+                        child: IconButton(
+                          onPressed: () async {
+                            await FastCachedImageConfig.clearAllCachedImages();
+                            setState(() => sizeCacheImages = 0);
+                            globals.scaffoldMessengerKey.currentState!
+                                .showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Cache of displayed images deleted'),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.delete_forever),
                         ),
-                      );
-                    },
-                    icon: const Icon(Icons.delete_forever),
-                  ),
+                      ),
+                    ),
+                    const Divider(height: 24),
+                    ListTile(
+                      title: const Text('Delete cache of shared images'),
+                      subtitle:
+                          Text('Size: ${formatBytes(bytes: sizeCacheShared)}'),
+                      trailing: CircleAvatar(
+                        child: IconButton(
+                          onPressed: () async {
+                            final cacheDir =
+                                await getApplicationCacheDirectory();
+                            if (cacheDir.existsSync()) {
+                              //cacheDir.deleteSync(recursive: true);
+                              for (var file in cacheDir.listSync()) {
+                                if (!file.path.endsWith('.hive') &&
+                                    !file.path.endsWith('.lock')) {
+                                  file.delete();
+                                }
+                              }
+                              setState(() => sizeCacheShared = 0);
+                            }
+                            //cacheDir.create();
+                            globals.scaffoldMessengerKey.currentState!
+                                .showSnackBar(
+                              const SnackBar(
+                                content: Text('Cache of shared images deleted'),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.delete_forever),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: FractionallySizedBox(
+                widthFactor: 0.5,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: FilledButton(
+                        onPressed: () {
+                          sharedPrefs.isDarkTheme = isDarkTheme;
+                          sharedPrefs.albumColumns = albumColumns;
+                          globals.scaffoldMessengerKey.currentState!
+                              .showSnackBar(
+                            const SnackBar(content: Text('Preferences saved')),
+                          );
+                        },
+                        child: const Text(
+                          'Save',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
