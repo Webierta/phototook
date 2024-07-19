@@ -1,6 +1,8 @@
-const appName = 'PhotoTook';
+const String appName = 'PhotoTook';
 
-const fontLogo = 'MajorMonoDisplay';
+const String version = '0.1.0';
+
+const String fontLogo = 'MajorMonoDisplay';
 
 const List<String> topics = [
   'animals',

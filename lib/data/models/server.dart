@@ -1,5 +1,13 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../apis/flickr/flickr_api.dart';
+import '../apis/openverse/openverse_api.dart';
+import '../apis/pexels/pexels_api.dart';
+import '../apis/pixabay/pixabay_api.dart';
+import '../apis/unsplash/unsplash_api.dart';
+import 'query_sent.dart';
+import 'server_api.dart';
+
 enum Server {
   unsplash(
     url: 'https://unsplash.com/',
@@ -53,4 +61,14 @@ enum Server {
   });
 
   String? get apiKey => dotenv.maybeGet(key, fallback: null);
+
+  ServerApi getServerApi(QuerySent querySent) {
+    return switch (this) {
+      unsplash => UnsplashApi(querySent: querySent),
+      pexels => PexelsApi(querySent: querySent),
+      flickr => FlickrApi(querySent: querySent),
+      pixabay => PixabayApi(querySent: querySent),
+      openverse => OpenverseApi(querySent: querySent),
+    };
+  }
 }

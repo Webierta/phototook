@@ -20,15 +20,12 @@ import 'server_api.dart';
 
 class RequestApi {
   final QuerySent querySent;
-
   List<Photo> totalPhotos = [];
   late Client client;
-
   RequestApi({required this.querySent}) : client = Client();
 
   Future<List<Photo>> get searchPhotos async {
     for (var server in Server.values) {
-      // EXCLUDE SERVERS
       if (server == Server.flickr &&
           (querySent.filter?.color != null ||
               querySent.filter?.orientation != null)) {
@@ -42,16 +39,8 @@ class RequestApi {
         continue;
       }
 
-      // DEFINE SERVER API FOR EACH SERVER
-      ServerApi serverApi = switch (server) {
-        Server.pexels => PexelsApi(querySent: querySent),
-        Server.unsplash => UnsplashApi(querySent: querySent),
-        Server.flickr => FlickrApi(querySent: querySent),
-        Server.pixabay => PixabayApi(querySent: querySent),
-        Server.openverse => OpenverseApi(querySent: querySent),
-      };
-
-      List<Photo> photosFromServer = await getPhotosFromServer(serverApi);
+      List<Photo> photosFromServer =
+          await getPhotosFromServer(server.getServerApi(querySent));
       totalPhotos.addAll(photosFromServer);
     }
 
@@ -60,14 +49,20 @@ class RequestApi {
   }
 
   Future<List<Photo>> getPhotosFromServer(ServerApi serverApi) async {
+    //print('START ${serverApi.server.name}');
     List<Photo> photos = [];
     if (serverApi.authorization == false) {
       return photos;
     }
-    final Response response = await client.get(
-      serverApi.uri,
-      headers: serverApi.headers,
-    );
+    Response response;
+    try {
+      response = await client.get(
+        serverApi.uri,
+        headers: serverApi.headers,
+      );
+    } catch (e) {
+      return photos;
+    }
     if (response.statusCode != 200) {
       //print('error status code in ${serverApi.server}');
       return photos;

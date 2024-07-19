@@ -67,6 +67,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
         ),
       );
     }).catchError((onError) {
+      // REVISAR ??
       globals.scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(content: Text('Error searching for photos')),
       );

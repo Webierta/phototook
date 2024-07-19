@@ -6,7 +6,9 @@ class FlickrApi extends ServerApi {
     super.server = Server.flickr;
     super.authorization =
         server.apiKey != null && server.apiKey!.isNotEmpty ? true : false;
-    super.headers = {};
+    super.headers = {
+      'Content-Type': 'application/json',
+    };
   }
 
   @override

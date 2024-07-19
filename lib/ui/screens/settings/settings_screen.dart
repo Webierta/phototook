@@ -166,52 +166,48 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
               ListTile(
                 title: const Text('Delete cache of displayed images'),
                 subtitle: Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
-                trailing: OutlinedButton(
-                  onPressed: () async {
-                    await FastCachedImageConfig.clearAllCachedImages();
-                    setState(() => sizeCacheImages = 0);
-                    globals.scaffoldMessengerKey.currentState!.showSnackBar(
-                      const SnackBar(
-                        content: Text('Cache of displayed images deleted'),
-                      ),
-                    );
-                  },
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(width: 2, color: Colors.black45),
-                    padding: const EdgeInsets.all(0),
+                trailing: CircleAvatar(
+                  child: IconButton(
+                    onPressed: () async {
+                      await FastCachedImageConfig.clearAllCachedImages();
+                      setState(() => sizeCacheImages = 0);
+                      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+                        const SnackBar(
+                          content: Text('Cache of displayed images deleted'),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.delete_forever),
                   ),
-                  child: const Icon(Icons.clear),
                 ),
               ),
               const Divider(height: 24),
               ListTile(
                 title: const Text('Delete cache of shared images'),
                 subtitle: Text('Size: ${formatBytes(bytes: sizeCacheShared)}'),
-                trailing: OutlinedButton(
-                  onPressed: () async {
-                    final cacheDir = await getApplicationCacheDirectory();
-                    if (cacheDir.existsSync()) {
-                      //cacheDir.deleteSync(recursive: true);
-                      for (var file in cacheDir.listSync()) {
-                        if (!file.path.endsWith('.hive') &&
-                            !file.path.endsWith('.lock')) {
-                          file.delete();
+                trailing: CircleAvatar(
+                  child: IconButton(
+                    onPressed: () async {
+                      final cacheDir = await getApplicationCacheDirectory();
+                      if (cacheDir.existsSync()) {
+                        //cacheDir.deleteSync(recursive: true);
+                        for (var file in cacheDir.listSync()) {
+                          if (!file.path.endsWith('.hive') &&
+                              !file.path.endsWith('.lock')) {
+                            file.delete();
+                          }
                         }
+                        setState(() => sizeCacheShared = 0);
                       }
-                      setState(() => sizeCacheShared = 0);
-                    }
-                    //cacheDir.create();
-                    globals.scaffoldMessengerKey.currentState!.showSnackBar(
-                      const SnackBar(
-                        content: Text('Cache of shared images deleted'),
-                      ),
-                    );
-                  },
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(width: 2, color: Colors.black45),
-                    padding: const EdgeInsets.all(0),
+                      //cacheDir.create();
+                      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+                        const SnackBar(
+                          content: Text('Cache of shared images deleted'),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.delete_forever),
                   ),
-                  child: const Icon(Icons.clear),
                 ),
               ),
             ],
