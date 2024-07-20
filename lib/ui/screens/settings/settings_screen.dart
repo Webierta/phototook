@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:phototook/ui/states/grid_columns_provider.dart';
@@ -25,6 +26,14 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
   //int albumColumns = 3;
   int sizeCacheImages = 0;
   int sizeCacheShared = 0;
+  late String lang;
+  late bool isDarkTheme;
+  late int albumColumns;
+
+  final List<String> locales =
+      AppLocalizations.supportedLocales // [Locale('en'), Locale('es')]
+          .map((locale) => (locale.languageCode))
+          .toList();
 
   @override
   void initState() {
@@ -64,6 +73,10 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> loadSharedPrefs() async {
     await sharedPrefs.init();
+    /* lang = sharedPrefs.lang;
+    isDarkTheme = sharedPrefs.isDarkTheme;
+    albumColumns = sharedPrefs.albumColumns; */
+
     /* setState(() {
       isDarkTheme = sharedPrefs.isDarkTheme;
       albumColumns = sharedPrefs.albumColumns;
@@ -74,10 +87,23 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     //bool isDarkTheme = sharedPrefs.isDarkTheme;
     //int albumColumns = sharedPrefs.albumColumns;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    var settings = ref.watch(settingsProvider);
+    //var settings = ref.watch(settingsProvider);
+    /* String lang = settings.idioma ?? sharedPrefs.lang;
     bool isDarkTheme = settings.isDarkTheme ?? sharedPrefs.isDarkTheme;
-    int albumColumns = settings.albumColumns ?? sharedPrefs.albumColumns;
+    int albumColumns = settings.albumColumns ?? sharedPrefs.albumColumns; */
+    /* String lang = sharedPrefs.lang;
+    bool isDarkTheme = sharedPrefs.isDarkTheme;
+    int albumColumns = sharedPrefs.albumColumns; */
+    /* ref.read(settingsProvider.notifier).setSettings(Settings(
+          idioma: lang,
+          isDarkTheme: isDarkTheme,
+          albumColumns: albumColumns,
+        )); */
+    lang = ref.watch(settingsProvider).idioma;
+    isDarkTheme = ref.watch(settingsProvider).isDarkTheme;
+    albumColumns = ref.watch(settingsProvider).albumColumns;
 
     return Container(
       decoration: BoxDecoration(
@@ -86,32 +112,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text('Settings'),
-          /* actions: [
-             IconButton(
-              onPressed: () {
-                ref.read(settingsProvider.notifier).setSettings(Settings(
-                    isDarkTheme: isDarkTheme, albumColumns: albumColumns));
-                sharedPrefs.isDarkTheme = isDarkTheme;
-                sharedPrefs.albumColumns = albumColumns;
-              },
-              icon: const CircleAvatar(child: Icon(Icons.save)),
-            ) 
-            /*  Padding(
-              padding: const EdgeInsets.only(right: 14),
-              child: OutlinedButton.icon(
-                onPressed: () {
-                  sharedPrefs.isDarkTheme = isDarkTheme;
-                  sharedPrefs.albumColumns = albumColumns;
-                  globals.scaffoldMessengerKey.currentState!.showSnackBar(
-                    const SnackBar(content: Text('Preferences saved')),
-                  );
-                },
-                icon: const Icon(Icons.save),
-                label: const Text('Save'),
-              ),
-            ) */
-          ], */
+          title: Text(l10n.settingsAppBar),
+          // Text(AppLocalizations.of(context)!.helloWorld),
         ),
         body: Column(
           children: [
@@ -120,26 +122,52 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    const ListTile(
-                      title: Text('Language'),
-                      trailing: CircleAvatar(child: Text('EN')),
+                    ListTile(
+                      title: Text(l10n.settingsLanguage),
+                      //trailing: CircleAvatar(child: Text('EN')),
+                      trailing: DropdownMenu<String>(
+                        initialSelection: lang,
+                        //textStyle: TextStyle(),
+                        onSelected: (String? value) {
+                          //ref.read(settingsProvider.notifier).setLang(value!);
+                          /* ref
+                              .read(settingsProvider.notifier)
+                              .setSettings(Settings(
+                                idioma: value!,
+                                isDarkTheme: isDarkTheme,
+                                albumColumns: albumColumns,
+                              )); */
+                          ref.read(settingsProvider.notifier).setLang(value!);
+                        },
+                        dropdownMenuEntries: locales
+                            .map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(
+                            value: value,
+                            label: switch (value) {
+                              'en' => 'English',
+                              'es' => 'Español',
+                              _ => 'English',
+                            },
+                          );
+                        }).toList(),
+                      ),
                     ),
                     const Divider(height: 24),
                     SwitchListTile(
-                      title: const Text('Theme'),
-                      secondary: CircleAvatar(
-                        child: Icon(
-                          isDarkTheme ? Icons.dark_mode : Icons.light_mode,
-                        ),
+                      title: Text(l10n.settingsThemeLight),
+                      thumbIcon: WidgetStateProperty.all(
+                        Icon(isDarkTheme ? Icons.dark_mode : Icons.light_mode),
                       ),
                       value: isDarkTheme,
                       onChanged: (val) {
-                        ref
+                        /* ref
                             .read(settingsProvider.notifier)
                             .setSettings(Settings(
+                              idioma: lang,
                               isDarkTheme: val,
                               albumColumns: albumColumns,
-                            ));
+                            )); */
+                        ref.read(settingsProvider.notifier).setTheme(val);
                         /* setState(() {
                           isDarkTheme = val;
                         }); */
@@ -147,7 +175,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const Divider(height: 24),
                     ListTile(
-                      title: const Text('Columns on results page'),
+                      title: Text(l10n.settingsNumberColumns),
                       subtitle: Slider(
                         value: albumColumns.toDouble(),
                         min: 1,
@@ -161,10 +189,17 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                           ref
                               .read(gridColumnsProvider.notifier)
                               .fit(value.toInt());
-                          ref.read(settingsProvider.notifier).setSettings(
+                          /* ref.read(settingsProvider.notifier).setSettings(
                               Settings(
+                                  idioma: lang,
                                   isDarkTheme: isDarkTheme,
-                                  albumColumns: value.toInt()));
+                                  albumColumns: value.toInt())); */
+                          ref
+                              .read(settingsProvider.notifier)
+                              .setAlbumColumns(value.toInt());
+                          /* ref
+                              .read(settingsProvider.notifier)
+                              .setAlbumColumns(value.toInt()); */
                         },
                       ),
                       trailing: CircleAvatar(
@@ -173,7 +208,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const Divider(height: 24),
                     ListTile(
-                      title: const Text('Delete cache of displayed images'),
+                      title: Text(l10n.settingsRemoveCache),
                       subtitle:
                           Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
                       trailing: CircleAvatar(
@@ -183,9 +218,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                             setState(() => sizeCacheImages = 0);
                             globals.scaffoldMessengerKey.currentState!
                                 .showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('Cache of displayed images deleted'),
+                              SnackBar(
+                                content: Text(l10n.settingsCacheRemoved),
                               ),
                             );
                           },
@@ -232,22 +266,31 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: FractionallySizedBox(
-                widthFactor: 0.5,
+                widthFactor: 0.8,
                 child: Row(
                   children: [
                     Expanded(
                       child: FilledButton(
                         onPressed: () {
+                          sharedPrefs.lang = lang;
                           sharedPrefs.isDarkTheme = isDarkTheme;
                           sharedPrefs.albumColumns = albumColumns;
+                          ref
+                              .watch(settingsProvider.notifier)
+                              .setSettings(Settings(
+                                idioma: lang,
+                                isDarkTheme: isDarkTheme,
+                                albumColumns: albumColumns,
+                              ));
                           globals.scaffoldMessengerKey.currentState!
                               .showSnackBar(
-                            const SnackBar(content: Text('Preferences saved')),
+                            SnackBar(content: Text(l10n.settingsSavedSettings)),
                           );
                         },
-                        child: const Text(
-                          'Save',
-                          style: TextStyle(fontWeight: FontWeight.w900),
+                        child: Text(
+                          l10n.settingsSave,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontWeight: FontWeight.w900),
                         ),
                       ),
                     ),

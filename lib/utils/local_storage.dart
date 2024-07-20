@@ -16,7 +16,7 @@ class LocalStorage {
     _sharedPrefs ??= await SharedPreferences.getInstance();
   }
 
-  String get lang => _sharedPrefs?.getString(_lang) ?? '';
+  String get lang => _sharedPrefs?.getString(_lang) ?? 'en';
   set lang(String value) => _sharedPrefs?.setString(_lang, value);
 
   bool get isDarkTheme => _sharedPrefs?.getBool(_isDarkTheme) ?? true;

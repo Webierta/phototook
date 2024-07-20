@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,6 +14,7 @@ import '../../../data/models/photo.dart';
 import '../../../data/models/query_sent.dart';
 import '../../../data/models/request_api.dart';
 import '../../../data/models/server.dart';
+import '../../../utils/consts.dart';
 import '../../../utils/globals.dart' as globals;
 import '../../../utils/local_storage.dart';
 import '../../states/filter_provider.dart';
@@ -34,9 +36,10 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
   bool isLoading = false;
   bool isFavorite = false;
   final LocalStorage sharedPrefs = LocalStorage();
-
+  //late AppLocalizations l10n;
   @override
   void initState() {
+    //l10n = AppLocalizations.of(navigatorKey.currentContext!)!;
     loadSharedPrefs();
     checkFavorite();
     super.initState();
@@ -70,27 +73,30 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     //final LocalStorage sharedPrefs = LocalStorage();
     //await sharedPrefs.init();
     List<String> listaFavoritos = sharedPrefs.favoritesPhotos;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (!listaFavoritos.contains(favoriteEncode)) {
       listaFavoritos.add(favoriteEncode);
       sharedPrefs.favoritesPhotos = listaFavoritos;
+
       globals.scaffoldMessengerKey.currentState!.showSnackBar(
-        const SnackBar(content: Text('Favorite add')),
+        SnackBar(content: Text(l10n.singleFavoriteAdd)),
       );
     } else {
       listaFavoritos.remove(favoriteEncode);
       sharedPrefs.favoritesPhotos = listaFavoritos;
       globals.scaffoldMessengerKey.currentState!.showSnackBar(
-        const SnackBar(content: Text('Favorite delete')),
+        SnackBar(content: Text(l10n.singleFavoriteDeleted)),
       );
     }
     checkFavorite();
   }
 
   Future<void> downloadImage() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (widget.photo.linkDownload == null) {
       showResultDownload(
         isResponseOk: false,
-        message: 'Download link not found',
+        message: l10n.singleDownloadLinkNotFound,
       );
       return;
     }
@@ -113,7 +119,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
       if (unsplashDownload.authorization == false) {
         showResultDownload(
           isResponseOk: false,
-          message: 'authorization failed',
+          message: l10n.singleAuthorizationFailed,
         );
         client.close();
         return;
@@ -125,7 +131,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
       if (response.statusCode != 200) {
         showResultDownload(
           isResponseOk: false,
-          message: 'server response failed',
+          message: l10n.singleServerFailed,
         );
         client.close();
         return;
@@ -151,7 +157,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
         } else {
           showResultDownload(
             isResponseOk: false,
-            message: 'server response failed',
+            message: l10n.singleServerFailed,
           );
         }
       });
@@ -163,11 +169,12 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
   }
 
   void showResultDownload({bool? isResponseOk, String? message}) {
-    String content = 'Error downloading image: $message';
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    String content = l10n.singleErrorDownloading('$message');
     if (isResponseOk == true) {
       content = message != null
-          ? 'Image downloaded at $message'
-          : 'Download process aborted. The license may not support direct download';
+          ? l10n.singleDownloadedAt(message)
+          : l10n.singleDownloadAborted;
     }
     globals.scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(content: Text(content)),
@@ -180,6 +187,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     }
     ShareResult? result;
     File? file;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (Platform.isAndroid) {
       final directory = await getApplicationCacheDirectory();
       final savePath = '${directory.path}/${widget.photo.id}';
@@ -192,7 +200,10 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
       if (response.statusCode == 200) {
         file = await File(savePath).writeAsBytes(response.bodyBytes);
         final XFile xFile = XFile(file.path);
-        result = await Share.shareXFiles([xFile], text: 'Great picture');
+        result = await Share.shareXFiles(
+          [xFile],
+          text: l10n.singleGreatPicture(appName),
+        );
         file.delete();
       } else {
         return;
@@ -200,7 +211,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     } else {
       result = await Share.share(
         '${widget.photo.linkDownload}',
-        subject: 'Great picture',
+        subject: l10n.singleGreatPicture(appName),
       );
     }
     //print('resultado:${result.status}');
@@ -227,11 +238,12 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               ),
             ),
             ModalRoute.withName('/home')))
-        .catchError((onError) =>
-            globals.scaffoldMessengerKey.currentState!.showSnackBar(
-              const SnackBar(content: Text('Error searching for photos')),
-            ))
-        .whenComplete(() {
+        .catchError((onError) {
+      final AppLocalizations l10n = AppLocalizations.of(context)!;
+      return globals.scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(content: Text(l10n.singleGetError)),
+      );
+    }).whenComplete(() {
       if (mounted) {
         setState(() => isLoading = false);
       }
@@ -240,6 +252,8 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    //l10n = AppLocalizations.of(navigatorKey.currentContext!)!;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -249,7 +263,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
         Scaffold(
           appBar: AppBar(
             title: Text(
-              photo.title ?? 'No Title',
+              photo.title ?? l10n.singleNoTitle,
               maxLines: 1,
               overflow: TextOverflow.fade,
             ),

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:phototook/ui/states/grid_columns_provider.dart';
 
 import '../../data/models/filter_request.dart';
 import '../../data/models/photo.dart';
 import '../../utils/local_storage.dart';
 import '../screens/single_photo/single_photo_screen.dart';
 import '../states/filter_provider.dart';
+import '../states/grid_columns_provider.dart';
 import 'cached_image.dart';
 
 class GridImages extends ConsumerStatefulWidget {
   final List<Photo> photos;
-
   const GridImages({super.key, required this.photos});
 
   @override
@@ -46,6 +45,7 @@ class GridImagesState extends ConsumerState<GridImages> {
   @override
   Widget build(BuildContext context) {
     crossAxisCount = ref.watch(gridColumnsProvider);
+    //crossAxisCount = ref.watch(settingsProvider).albumColumns;
     List<Photo> photos = widget.photos;
     final orientation = ref.watch(filterProvider).orientation;
     if (orientation != null) {

@@ -1,11 +1,22 @@
 class Settings {
-  final String? idioma;
-  final bool? isDarkTheme;
-  final int? albumColumns;
+  String idioma;
+  bool isDarkTheme;
+  int albumColumns;
 
-  const Settings({
+  Settings({
     this.idioma = 'en',
     this.isDarkTheme = true,
     this.albumColumns = 3,
   });
+
+  Settings copy({
+    idioma,
+    isDarkTheme,
+    albumColumns,
+  }) =>
+      Settings(
+        idioma: idioma ?? this.idioma,
+        isDarkTheme: isDarkTheme ?? this.isDarkTheme,
+        albumColumns: albumColumns ?? this.albumColumns,
+      );
 }

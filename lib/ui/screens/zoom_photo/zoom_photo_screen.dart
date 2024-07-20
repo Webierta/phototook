@@ -22,7 +22,7 @@ class ZoomPhotoScreen extends StatelessWidget {
               constrained: true,
               boundaryMargin: const EdgeInsets.all(double.infinity),
               minScale: 0.1,
-              maxScale: 4.0,
+              maxScale: 5.5,
               child: FastCachedImage(
                 url: url,
                 //width: MediaQuery.of(context).size.width,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/models/favorite.dart';
@@ -40,7 +41,6 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
     List<String> favoritesString = sharedPrefs.favoritesPhotos;
     List<Photo> favoritesPhotos = [];
     for (var fav in favoritesString) {
-      //print(fav);
       favoritesPhotos.add(Favorite.fromJson(jsonDecode(fav)));
     }
     setState(() {
@@ -51,20 +51,23 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
   Future<void> deleteAllFavorites() async {
     var confirmDelete = await showDialog<bool>(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Confirm delete'),
-        content: const Text('This will remove all favorites'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('OK'),
-          ),
-        ],
-      ),
+      builder: (BuildContext context) {
+        final AppLocalizations l10n = AppLocalizations.of(context)!;
+        return AlertDialog(
+          title: Text(l10n.favoritesConfirmDelete),
+          content: Text(l10n.favoritesRemoveAll),
+          actions: <Widget>[
+            FilledButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text(l10n.favoritesCancel),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text(l10n.favoritesOk),
+            ),
+          ],
+        );
+      },
     );
     if (confirmDelete == true) {
       final LocalStorage sharedPrefs = LocalStorage();
@@ -80,12 +83,13 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        title: Text(l10n.favoritesAppBar),
         actions: [
           if (isViewGrid)
             IconButton(
@@ -108,7 +112,7 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
           ? isViewGrid
               ? GridImages(photos: photos)
               : CardView(photos: photos)
-          : const NoImages(message: 'There are no favorites'),
+          : NoImages(message: l10n.favoritesNoImages),
     );
   }
 }

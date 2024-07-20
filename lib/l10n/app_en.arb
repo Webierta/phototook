@@ -1,0 +1,54 @@
+{
+    "@@locale": "en",
+
+    "searchHomeSearch": "Search",
+    "searchHomeError": "There was an error getting the photos",
+    "searchHomeFilters": "Filters",
+    "searchHomeByTopic": "Search by topic",
+    "topics": "animals:architecture-interior:history:business-work:current-events:experimental:fashion-beauty:film:food-drink:health:nature:people:spirituality:sports:street:technology:textures-patterns:travel:wallpapers:3d-renders",
+    "@topics": {
+        "description": "topics"
+    },
+
+    "bottomSheetFilterByOrientation": "Filter by Orientation",
+    "bottomSheetFilterByColor": "Filter by Color",
+    "bottomSheetFilterClean": "Clean",
+    "bottomSheetFilterOk": "Ok",             
+    "bottomSheetFilterOrientation": "{OrientationFilter, select, landscape{landscape} portrait{portrait} squarish{squarish} other{unknown}}",
+
+    "albumNoImages": "No image found",
+
+    "favoritesAppBar": "Favorites",
+    "favoritesConfirmDelete": "Confirm delete",
+    "favoritesRemoveAll": "This will remove all favorites",
+    "favoritesCancel": "Cancel",
+    "favoritesOk": "Ok",
+    "favoritesNoImages": "There are no favorites",
+    
+    "settingsAppBar": "Settings",
+    "settingsLanguage": "Language",
+    "settingsThemeLight": "Theme light",
+    "settingsNumberColumns": "Number of columns on the results page",    
+    "settingsRemoveCache": "Remove cache from images",
+    "settingsCacheRemoved": "Cache memory removed",
+    "settingsSize": "Size",
+    "settingsSavedSettings": "Saved settings",
+    "settingsSave": "Save settings",
+
+    "singleFavoriteAdd": "Added favorite",
+    "singleFavoriteDeleted": "Deleted favorite",
+    "singleDownloadLinkNotFound": "Download link not found",
+    "singleAuthorizationFailed": "Authorization failed",
+    "singleServerFailed": "Server response failed",
+    "singleErrorDownloading": "Error downloading image {message}",
+    "singleDownloadedAt": "Image downloaded at {message}",
+    "singleDownloadAborted": "Download process aborted. The license may not support direct download",
+    "singleGreatPicture": "Great picture from {appName}",
+    "singleGetError": "There was an error getting the photos",
+    "singleNoTitle": "No title",
+
+    "cardViewError": "There was an error getting the photos",
+
+    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favorites} settings{Settings} about{About} other{other}}"
+    
+}

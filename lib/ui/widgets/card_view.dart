@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/photo.dart';
@@ -37,11 +38,12 @@ class CardViewState extends ConsumerState<CardView> {
                   AlbumScreen(querySent: querySent, photos: fotos),
             ),
             ModalRoute.withName('/home')))
-        .catchError((onError) =>
-            globals.scaffoldMessengerKey.currentState!.showSnackBar(
-              const SnackBar(content: Text('Error searching for photos')),
-            ))
-        .whenComplete(() {
+        .catchError((onError) {
+      final AppLocalizations l10n = AppLocalizations.of(context)!;
+      return globals.scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(content: Text(l10n.cardViewError)),
+      );
+    }).whenComplete(() {
       if (mounted) {
         setState(() => isLoading = false);
       }

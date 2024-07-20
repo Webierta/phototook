@@ -1,6 +1,7 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -44,10 +45,13 @@ class MainAppState extends ConsumerState<MainApp> {
   loadSharedPref() async {
     final LocalStorage sharedPrefs = LocalStorage();
     await sharedPrefs.init();
-    ref.read(settingsProvider.notifier).setSettings(Settings(
-          isDarkTheme: sharedPrefs.isDarkTheme,
-          albumColumns: sharedPrefs.albumColumns,
-        ));
+    ref.read(settingsProvider.notifier).setSettings(
+          Settings(
+            idioma: sharedPrefs.lang,
+            isDarkTheme: sharedPrefs.isDarkTheme,
+            albumColumns: sharedPrefs.albumColumns,
+          ),
+        );
   }
 
   @override
@@ -57,10 +61,18 @@ class MainAppState extends ConsumerState<MainApp> {
     return MaterialApp(
       title: appName,
       debugShowCheckedModeBanner: false,
+      // KEYS
       scaffoldMessengerKey: globals.scaffoldMessengerKey,
-      themeMode: settings.isDarkTheme! ? ThemeMode.dark : ThemeMode.light,
+      //navigatorKey: navigatorKey,
+      // THEME
+      themeMode: settings.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeApp.lightThemeData,
       darkTheme: ThemeApp.darkThemeData,
+      // LOCALES
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale(settings.idioma),
+      // ROUTES
       initialRoute: '/splash',
       routes: <String, WidgetBuilder>{
         '/splash': (context) => const SplashScreen(),

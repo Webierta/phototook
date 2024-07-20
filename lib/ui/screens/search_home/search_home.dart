@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/models/filter_request.dart';
@@ -68,14 +69,18 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
       );
     }).catchError((onError) {
       // REVISAR ??
+      final AppLocalizations l10n = AppLocalizations.of(context)!;
       globals.scaffoldMessengerKey.currentState!.showSnackBar(
-        const SnackBar(content: Text('Error searching for photos')),
+        SnackBar(content: Text(l10n.searchHomeError)),
       );
     }).whenComplete(() => setState(() => isLoading = false));
   }
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    List<String> topics = l10n.topics.split(':');
+
     //var settings = ref.watch(settingsProvider);
     var filter = ref.watch(filterProvider);
     return Container(
@@ -145,7 +150,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
                                           .withOpacity(0.5),
                                       //labelText: 'Query',
                                       //helperText: 'Query',
-                                      hintText: 'Search',
+                                      hintText: l10n.searchHomeSearch,
                                       suffixIcon: IconButton(
                                         onPressed: () {
                                           setState(() =>
@@ -181,9 +186,11 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
                                           },
                                         );
                                       },
-                                      label: const Text(
-                                        'Filters',
-                                        style: TextStyle(color: Colors.black87),
+                                      label: Text(
+                                        l10n.searchHomeFilters,
+                                        style: const TextStyle(
+                                          color: Colors.black87,
+                                        ),
                                       ),
                                       icon: const Icon(
                                         Icons.tune,
@@ -222,8 +229,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              //const Spacer(),
-                              const Text('Search by topic'),
+                              Text(l10n.searchHomeByTopic),
                               Wrap(
                                 spacing: 5.0,
                                 runSpacing: 5.0,

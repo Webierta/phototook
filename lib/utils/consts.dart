@@ -4,7 +4,7 @@ const String version = '0.1.0';
 
 const String fontLogo = 'MajorMonoDisplay';
 
-const List<String> topics = [
+/* const List<String> topics = [
   'animals',
   'architecture-interior',
   'history',
@@ -25,4 +25,4 @@ const List<String> topics = [
   'travel',
   'wallpapers',
   '3d-renders'
-];
+]; */

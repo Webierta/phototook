@@ -1,5 +1,6 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/models/photo.dart';
@@ -75,10 +76,13 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
 
   void changeCrossAxisCount() {
     ref.read(gridColumnsProvider.notifier).change();
+    //int albumColumns = ref.watch(settingsProvider).albumColumns + 1;
+    //ref.read(settingsProvider.notifier).setAlbumColumns(albumColumns);
   }
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -141,7 +145,7 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
                 ),
               ],
             )
-          : const NoImages(message: 'Images not found'),
+          : NoImages(message: l10n.albumNoImages),
     );
   }
 

@@ -150,7 +150,7 @@ class ShowInfo extends StatelessWidget {
       return ListTile(
         dense: true,
         leading: const Icon(Icons.photo_size_select_large),
-        title: Text('Original Size: W ${photo.width} x H ${photo.height} px'),
+        title: Text('Original size: W ${photo.width} x H ${photo.height} px'),
       );
     }
     if (attribute == InfoAttribute.license &&

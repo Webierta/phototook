@@ -1,0 +1,54 @@
+{
+    "@@locale": "es",
+
+    "searchHomeSearch": "Buscar",
+    "searchHomeError": "Se ha producido un error obteniendo las fotos",
+    "searchHomeFilters": "Filtros",
+    "searchHomeByTopic": "Buscar por tema",
+    "topics": "animales:arquitectura-diseño:historia:trabajo-negocios:actualidad:experimental:moda:cine:comida-bebida:salud:naturaleza:gente:espiritualidad:deportes:calle:tecnología:texturas-patrones:viajes:fondos de pantalla:3d-renders",
+    "@topics": {
+        "description": "topics"
+    },  
+
+    "bottomSheetFilterByOrientation": "Filtrar por Orientación",
+    "bottomSheetFilterByColor": "Filtrar por Color",
+    "bottomSheetFilterClean": "Limpiar",
+    "bottomSheetFilterOk": "Ok",
+    "bottomSheetFilterOrientation": "{OrientationFilter, select, landscape{paisaje} portrait{retrato} squarish{cuadrado} other{unknown}}",
+
+    "albumNoImages": "Ninguna imagen encontrada",
+
+    "favoritesAppBar": "Favoritos",
+    "favoritesConfirmDelete": "Confirmar borrado",
+    "favoritesRemoveAll": "Esto eliminará todos los favoritos",
+    "favoritesCancel": "Cancelar",
+    "favoritesOk": "Ok",
+    "favoritesNoImages": "No hay favoritos",
+
+    "settingsAppBar": "Ajustes",
+    "settingsLanguage": "Idioma",
+    "settingsThemeLight": "Luz del tema",
+    "settingsNumberColumns": "Número de columnas en la página de resultados",
+    "settingsRemoveCache": "Eliminar memoria caché de las imágenes",
+    "settingsCacheRemoved": "Memoria caché eliminada",
+    "settingsSize": "Tamaño",
+    "settingsSavedSettings": "Ajustes guardados",
+    "settingsSave": "Guardar ajustes",
+
+    "singleFavoriteAdd": "Favorito añadido",
+    "singleFavoriteDeleted": "Favorito eliminado",
+    "singleDownloadLinkNotFound": "Enlace de descarga no encontrado",
+    "singleAuthorizationFailed": "Error de autorización",
+    "singleServerFailed": "Error en la respuesta del servidor",
+    "singleErrorDownloading": "Error descargando la imagen {message}",
+    "singleDownloadedAt": "Imagen descargada en {message}",
+    "singleDownloadAborted": "Proceso de descarga abortado. Puede que la licencia no admita la descarga directa",
+    "singleGreatPicture": "Gran foto desde {appName}",
+    "singleGetError": "Ha ocurrido un error obteniendo las fotos",
+    "singleNoTitle": "Sin título",
+
+    "cardViewError": "Se ha producido un error obteniendo las fotos",
+
+    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favoritos} settings{Ajustes} about{About} other{other}}"
+
+}
