@@ -19,6 +19,7 @@ class MarkdownStyle {
       ),
       h2: const TextStyle(
         //color: Color(0xFFB0BEC5),
+        fontWeight: FontWeight.w100,
         fontSize: 22,
       ),
       h3: const TextStyle(

@@ -13,6 +13,12 @@ class ThemeApp {
       appBarTheme: const AppBarTheme(color: Colors.transparent),
       //textTheme: TextTheme(),
       fontFamily: 'Nunito',
+      /* textTheme: const TextTheme(
+        headlineLarge: TextStyle(
+          fontWeight: FontWeight.w100,
+        ),
+        bodyLarge: TextStyle(fontSize: 18),
+      ), */
     );
   }
 

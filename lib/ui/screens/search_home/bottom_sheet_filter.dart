@@ -57,64 +57,79 @@ class BottomSheetFilterState extends ConsumerState<BottomSheetFilter> {
                     ListTile(
                       title: Text(l10n.bottomSheetFilterByOrientation),
                       subtitle: Padding(
-                        padding: const EdgeInsets.only(top: 14),
-                        child: ToggleButtons(
-                          /*  direction: MediaQuery.of(context).size.width < 400
-                              ? Axis.vertical
-                              : Axis.horizontal, */
-                          direction: Axis.vertical,
-                          onPressed: (int index) {
-                            for (int buttonIndex = 0;
-                                buttonIndex < selectionsOrientation.length;
-                                buttonIndex++) {
-                              if (buttonIndex == index) {
-                                setState(() {
-                                  selectionsOrientation[buttonIndex] =
-                                      !selectionsOrientation[buttonIndex];
-                                });
-                              } else {
-                                setState(() {
-                                  selectionsOrientation[buttonIndex] = false;
-                                });
+                        padding: const EdgeInsets.fromLTRB(24, 14, 24, 0),
+                        child: Container(
+                          padding: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            /* border: Border.all(
+                              color: Theme.of(context).colorScheme.secondary,
+                              width: 0,
+                            ), */
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(8.0),
+                            ),
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          child: ToggleButtons(
+                            /*  direction: MediaQuery.of(context).size.width < 400
+                                ? Axis.vertical
+                                : Axis.horizontal, */
+                            direction: Axis.vertical,
+                            onPressed: (int index) {
+                              for (int buttonIndex = 0;
+                                  buttonIndex < selectionsOrientation.length;
+                                  buttonIndex++) {
+                                if (buttonIndex == index) {
+                                  setState(() {
+                                    selectionsOrientation[buttonIndex] =
+                                        !selectionsOrientation[buttonIndex];
+                                  });
+                                } else {
+                                  setState(() {
+                                    selectionsOrientation[buttonIndex] = false;
+                                  });
+                                }
                               }
-                            }
-                            int indexTrue = selectionsOrientation
-                                .indexWhere((item) => item == true);
-                            if (indexTrue == -1) {
-                              setState(() => orientationSelect = null);
-                            } else {
-                              setState(() => orientationSelect =
-                                  OrientationFilter.values[indexTrue]);
-                            }
-                            ref
-                                .read(filterProvider.notifier)
-                                .setFilter(FilterRequest(
-                                  orientation: orientationSelect,
-                                  color: colorSelect,
-                                ));
-                          },
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
-                          selectedBorderColor: Colors.green[700],
-                          selectedColor: Colors.white,
-                          fillColor: Colors.green,
-                          textStyle: Theme.of(context).textTheme.labelMedium!,
-                          //color: Colors.red[400],
-                          /* constraints: const BoxConstraints(
-                            minHeight: 40.0,
-                            minWidth: 100,
-                            maxWidth: 100,
-                          ), */
-                          /* constraints: const BoxConstraints(
-                            minWidth: 100,
-                          ), */
-                          isSelected: selectionsOrientation,
-                          children: OrientationFilter.values
-                              //.map((item) => Text(item.name.toUpperCase()))
-                              .map((item) => Text(l10n
-                                  .bottomSheetFilterOrientation(item.name)
-                                  .toUpperCase()))
-                              .toList(),
+                              int indexTrue = selectionsOrientation
+                                  .indexWhere((item) => item == true);
+                              if (indexTrue == -1) {
+                                setState(() => orientationSelect = null);
+                              } else {
+                                setState(() => orientationSelect =
+                                    OrientationFilter.values[indexTrue]);
+                              }
+                              ref
+                                  .read(filterProvider.notifier)
+                                  .setFilter(FilterRequest(
+                                    orientation: orientationSelect,
+                                    color: colorSelect,
+                                  ));
+                            },
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            selectedBorderColor: Colors.green[700],
+                            borderColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            borderWidth: 0.2,
+                            selectedColor: Colors.white,
+                            fillColor: Colors.green,
+                            textStyle: Theme.of(context).textTheme.labelMedium!,
+                            /* constraints: const BoxConstraints(
+                              minHeight: 40.0,
+                              minWidth: 100,
+                              maxWidth: 100,
+                            ), */
+                            /* constraints: const BoxConstraints(
+                              minWidth: 100,
+                            ), */
+                            isSelected: selectionsOrientation,
+                            children: OrientationFilter.values
+                                .map((item) => Text(l10n
+                                    .bottomSheetFilterOrientation(item.name)
+                                    .toUpperCase()))
+                                .toList(),
+                          ),
                         ),
                       ),
                     ),

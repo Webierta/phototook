@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../states/settings_provider.dart';
+import '../../../utils/consts.dart';
 import '../../styles/styles_app.dart';
 import 'btc_wallet_address.dart';
-import 'markdown_locales.dart';
 import 'markdown_text.dart';
+
+const String urlPayPal =
+    'https://www.paypal.com/donate?hosted_button_id=986PSAHLH6N4L';
+const String urlGitHub = 'https://github.com/Webierta/phototook';
+const String urlGitHubIssues = 'https://github.com/Webierta/phototook/issues';
 
 class AboutScreen extends ConsumerWidget {
   const AboutScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final idioma = ref.watch(settingsProvider).idioma;
+    //final idioma = ref.watch(settingsProvider).idioma;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
-    String data1 = switch (idioma) {
-      'en' => MarkdownLocales.en1,
-      'es' => MarkdownLocales.es1,
-      _ => MarkdownLocales.en1,
-    };
-
-    String data2 = switch (idioma) {
-      'en' => MarkdownLocales.en2,
-      'es' => MarkdownLocales.es2,
-      _ => MarkdownLocales.en2,
-    };
+    Future<void> launchWeb(String url) async {
+      if (!await launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      )) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Could not launch $url'),
+        ));
+      }
+    }
 
     return Container(
       decoration: BoxDecoration(
@@ -41,10 +48,68 @@ class AboutScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MarkdownText(data: data1),
-                  const BtcWalletAddress(),
-                  MarkdownText(data: data2),
+                  const Text(
+                    appName,
+                    style: TextStyle(fontFamily: fontLogo, fontSize: 32),
+                  ),
+                  MarkdownText(data: l10n.aboutSubtitle),
+                  Divider(
+                    color: Theme.of(context).colorScheme.secondary,
+                    thickness: 0.4,
+                  ),
+                  MarkdownText(data: l10n.aboutIntro1),
+                  MarkdownText(data: l10n.aboutIntro2),
+                  MarkdownText(data: l10n.aboutIntro3),
+                  MarkdownText(data: l10n.aboutIntro4),
+                  Divider(
+                    color: Theme.of(context).colorScheme.secondary,
+                    thickness: 0.4,
+                  ),
+                  MarkdownText(data: l10n.aboutAuthor),
+                  const MarkdownText(data: authorBlock),
+                  MarkdownText(data: l10n.aboutLicense),
+                  Divider(
+                    color: Theme.of(context).colorScheme.secondary,
+                    thickness: 0.4,
+                  ),
+                  MarkdownText(data: l10n.aboutSupport),
+                  MarkdownText(data: l10n.aboutSupport1),
+                  MarkdownText(data: l10n.aboutSupport2(urlGitHubIssues)),
+                  MarkdownText(data: l10n.aboutSupport3),
+                  MarkdownText(data: l10n.aboutPaypal),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () => launchWeb(urlPayPal),
+                      child: Image.asset('assets/images/paypal.png'),
+                    ),
+                  ),
+                  MarkdownText(data: l10n.aboutBTC1),
+                  Center(child: Image.asset('assets/images/Bitcoin_QR.png')),
+                  MarkdownText(data: l10n.aboutBTC2),
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 14),
+                      child: BtcWalletAddress(),
+                    ),
+                  ),
+                  Divider(
+                    color: Theme.of(context).colorScheme.secondary,
+                    thickness: 0.4,
+                  ),
+                  MarkdownText(data: l10n.aboutWarranty),
+                  MarkdownText(data: l10n.aboutWarranty2),
+                  MarkdownText(data: l10n.aboutWarranty3),
+                  Divider(
+                    color: Theme.of(context).colorScheme.secondary,
+                    thickness: 0.4,
+                  ),
+                  const MarkdownText(data: attributions),
+                  Divider(
+                    color: Theme.of(context).colorScheme.secondary,
+                    thickness: 0.4,
+                  ),
                 ],
               ),
             ),
@@ -55,41 +120,28 @@ class AboutScreen extends ConsumerWidget {
   }
 }
 
-/* class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key});
+const String authorBlock = """
+> Jesús Cuerda (Webierta)
+> PhotoTook $version
+> Copyleft 2024. Hosted on [Github]($urlGitHub)
+> All Wrongs Reserved. Licencia GPLv3
+""";
 
-  @override
-  State<AboutScreen> createState() => _AboutScreenState();
-}
+const String attributions = """
+## Attributions
 
-class _AboutScreenState extends State<AboutScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: StylesApp.gradient(Theme.of(context).colorScheme),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: const Text('About'),
-        ),
-        body: const SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  MarkdownText(data: MarkdownAbout.en1),
-                  BtcWalletAddress(),
-                  MarkdownText(data: MarkdownAbout.en2),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-} */
+### Images:
+
+* Home screen image of [Lisa Fotios](https://www.pexels.com/es-es/foto/persona-con-foto-de-un-solo-arbol-durante-el-dia-1252983/) on Pexels.
+
+* GIF of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613).
+
+* GIF of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592) on [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592).
+
+### Fonts:
+
+* Nunito. Copyright 2014 [The Nunito Project Authors](https://github.com/googlefonts/nunito). Licensed under the SIL Open Font License, Version 1.1.
+
+* Major Mono Display. Copyright 2018 [The Major Mono Project Authors](https://github.com/googlefonts/majormono). Licensed under the SIL Open Font License, Version 1.1.
+
+""";

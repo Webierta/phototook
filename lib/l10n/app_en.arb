@@ -49,6 +49,25 @@
 
     "cardViewError": "There was an error getting the photos",
 
-    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favorites} settings{Settings} about{About} other{other}}"
+    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favorites} settings{Settings} about{About} other{other}}",
+
+    "aboutSubtitle": "#### META SEARCH ENGINE FOR PHOTOS ON THE BEST IMAGES PLATFORMS",
+    "aboutIntro1": "**PhotoTook** searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.",
+    "aboutIntro2": "The app accesses photos from the platforms through their API and has no official relationship with any of them. Each platform owns its registered trademark and logo and this application is not sponsored or supported by any.",
+    "aboutIntro3": "PhotoTook searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.",
+    "aboutIntro4": "PhotoTook searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.",
+    "aboutAuthor":  "## Author and License",
+    "aboutLicense": "This app is freely shared under the terms of the *GNU General Public License v.3* in the hope that it will be useful, but WITHOUT ANY WARRANTY. This program is **free software**: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 (GPLv3). The GNU General Public License does not permit incorporating this program into proprietary programs.",
+    "aboutSupport": "## Support",
+    "aboutSupport1": "**PhotoTook** is *free and open source software*. Please consider contributing to keep the development of this App active. Thank you.",
+    "aboutSupport2": "Any suggestions, criticism, comments or bug reports are appreciated. Do you think you've found a problem? Identifying and fixing bugs makes this app better for everyone. Report a bug at [GitHub issues]({urlGitHubIssues}).",
+    "aboutSupport3": "You can help the development of this and other apps with a small contribution via PayPal or Bitcoins. Thank you!",
+    "aboutPaypal": "Donate via Paypal (opens PayPal payment page):",
+    "aboutBTC1": "To make a donation in Bitcoins, scan this QR code with your wallet app:",
+    "aboutBTC2": "or copy my BTC wallet address:",
+    "aboutWarranty": "## Warranty, Security and Privacy",
+    "aboutWarranty1": "**Free and ad-free application**. No user data is used. **Open source software** (source code on Github), free of spyware, malware, viruses or any process that threatens your device or violates your privacy. This application does not extract or store any information or require any external permission, and renounces advertising and any tracking mechanism.",
+    "aboutWarranty2": "Each platform has its own terms and conditions and its own privacy and cookie policy, and images have different types of license and property rights for their use.",
+    "aboutWarranty3": "It cannot be guaranteed that the content offered is free of errors, whether errors in the server from which the data originates, in the process of accessing the data or in its processing, so the information presented does not have any guarantee, either explicit or implicit. The user expressly agrees to be aware of this circumstance. The use of the information obtained by this App is carried out by the user at his own risk and expense, and he is solely responsible to third parties for any damages that may arise from it."
     
 }

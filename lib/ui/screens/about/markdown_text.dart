@@ -26,6 +26,8 @@ class MarkdownText extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 20),
+      selectable: true,
+      //softLineBreak: true,
       data: data,
       //styleSheet: MarkdownStyle.buildMarkdownStyleSheet(),
       styleSheet:

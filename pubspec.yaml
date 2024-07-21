@@ -39,6 +39,7 @@ flutter:
     - family: Nunito
       fonts:
         - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito-ExtraLight.ttf
     - family: MajorMonoDisplay
       fonts:
         - asset: assets/fonts/MajorMonoDisplay-Regular.ttf
