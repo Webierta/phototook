@@ -16,43 +16,45 @@ class ZoomPhotoScreen extends StatelessWidget {
         photo.urlLD ??
         photo.url;
 
-    return Center(
-      child: Stack(
-        children: [
-          if (url.isEmpty)
-            const NoImages(
-              message:
-                  'Invalid image data.\nThis URL is invalid or has expired.',
-            )
-          else
-            SizedBox.expand(
-              child: InteractiveViewer(
-                constrained: true,
-                boundaryMargin: const EdgeInsets.all(double.infinity),
-                minScale: 0.1,
-                maxScale: 5.5,
-                child: FastCachedImage(
-                  url: url,
-                  //width: MediaQuery.of(context).size.width,
-                  errorBuilder: (context, exception, stacktrace) {
-                    return const NoImages(
-                      message:
-                          'Invalid image data.\nThis URL is invalid or has expired.',
-                    );
-                  },
+    return SafeArea(
+      child: Center(
+        child: Stack(
+          children: [
+            if (url.isEmpty)
+              const NoImages(
+                message:
+                    'Invalid image data.\nThis URL is invalid or has expired.',
+              )
+            else
+              SizedBox.expand(
+                child: InteractiveViewer(
+                  constrained: true,
+                  boundaryMargin: const EdgeInsets.all(double.infinity),
+                  minScale: 0.1,
+                  maxScale: 5.5,
+                  child: FastCachedImage(
+                    url: url,
+                    //width: MediaQuery.of(context).size.width,
+                    errorBuilder: (context, exception, stacktrace) {
+                      return const NoImages(
+                        message:
+                            'Invalid image data.\nThis URL is invalid or has expired.',
+                      );
+                    },
+                  ),
+                ),
+              ),
+            Positioned(
+              left: 14,
+              child: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const CircleAvatar(
+                  child: Icon(Icons.close),
                 ),
               ),
             ),
-          Positioned(
-            left: 14,
-            child: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const CircleAvatar(
-                child: Icon(Icons.close),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
