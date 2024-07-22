@@ -19,6 +19,11 @@ class PixabayApi extends ServerApi {
     parameters['page'] = '${querySent.page}';
     parameters['per_page'] = '${server.items}';
     parameters['image_type'] = 'photo';
+
+    if (querySent.photo?.id != null) {
+      parameters['id'] = querySent.photo!.id;
+    }
+
     if (querySent.filter != null && querySent.filter?.color != null) {
       String nameColor = switch (querySent.filter!.color) {
         ColorFilter.magenta => 'pink',

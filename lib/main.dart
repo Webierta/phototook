@@ -77,6 +77,7 @@ class MainAppState extends ConsumerState<MainApp> {
       routes: <String, WidgetBuilder>{
         '/splash': (context) => const SplashScreen(),
         '/home': (context) => const SearchHomeScreen(),
+        //'/single_photo': (context) => const SinglePhotoScreen(),
         //'/settings': (BuildContext context) => const SettingScreen(),
       },
     );

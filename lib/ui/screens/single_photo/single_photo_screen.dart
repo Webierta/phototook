@@ -33,12 +33,15 @@ class SinglePhotoScreen extends ConsumerStatefulWidget {
 }
 
 class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
+  late Photo photo;
+
   bool isLoading = false;
   bool isFavorite = false;
   final LocalStorage sharedPrefs = LocalStorage();
   //late AppLocalizations l10n;
   @override
   void initState() {
+    photo = widget.photo;
     //l10n = AppLocalizations.of(navigatorKey.currentContext!)!;
     loadSharedPrefs();
     checkFavorite();
@@ -50,7 +53,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
   }
 
   void checkFavorite() {
-    Favorite favorite = Favorite.fromPhoto(widget.photo);
+    Favorite favorite = Favorite.fromPhoto(photo);
     Map<String, dynamic> favoriteJson = favorite.toJson();
     final String favoriteEncode = jsonEncode(favoriteJson);
     //final LocalStorage sharedPrefs = LocalStorage();
@@ -63,8 +66,8 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     }
   }
 
-  void favoriteImage() async {
-    Favorite favorite = Favorite.fromPhoto(widget.photo);
+  void toggleFavorite() async {
+    Favorite favorite = Favorite.fromPhoto(photo);
 
     // SAVE TO OUR LOCAL STORAGE
     Map<String, dynamic> favoriteJson = favorite.toJson();
@@ -91,9 +94,39 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     checkFavorite();
   }
 
+  refreshUrlImage() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    Photo updatePhoto;
+    final querySent = QuerySent(query: 'test', page: 1, photo: photo);
+    try {
+      final List<Photo> listPhotos =
+          await RequestApi(querySent: querySent).searchPhotos;
+      if (listPhotos.isNotEmpty) {
+        updatePhoto = listPhotos.first;
+        print(listPhotos.length);
+        print(updatePhoto.linkDownload ?? updatePhoto.url);
+        print(widget.photo == updatePhoto);
+        //favoriteImage();
+        setState(() {
+          //photo = updatePhoto;
+          photo.linkDownload = updatePhoto.linkDownload ?? updatePhoto.url;
+        });
+        //favoriteImage();
+      } else {
+        print('LISTA VACIA');
+      }
+    } catch (e) {
+      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(content: Text(l10n.searchHomeError)),
+      );
+      return;
+    }
+  }
+
   Future<void> downloadImage() async {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    if (widget.photo.linkDownload == null) {
+    //String url = widget.photo.linkDownload ?? widget.photo.url;
+    if (photo.linkDownload == null) {
       showResultDownload(
         isResponseOk: false,
         message: l10n.singleDownloadLinkNotFound,
@@ -109,13 +142,13 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
       directory = (await getDownloadsDirectory() ??
           await getApplicationDocumentsDirectory());
     }
-    String savePath = '${directory.path}/${widget.photo.id}';
 
-    String url = widget.photo.linkDownload!;
+    String savePath = '${directory.path}/${photo.id}';
+    String url = photo.linkDownload!;
     final Client client = Client();
 
-    if (widget.photo.server == Server.unsplash) {
-      final unsplashDownload = UnsplashDownload(id: widget.photo.id);
+    if (photo.server == Server.unsplash) {
+      final unsplashDownload = UnsplashDownload(id: photo.id);
       if (unsplashDownload.authorization == false) {
         showResultDownload(
           isResponseOk: false,
@@ -159,6 +192,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
             isResponseOk: false,
             message: l10n.singleServerFailed,
           );
+          return;
         }
       });
     } catch (error) {
@@ -182,7 +216,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
   }
 
   Future<void> shareImage() async {
-    if (widget.photo.linkDownload == null) {
+    if (photo.linkDownload == null) {
       return;
     }
     ShareResult? result;
@@ -190,12 +224,12 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (Platform.isAndroid) {
       final directory = await getApplicationCacheDirectory();
-      final savePath = '${directory.path}/${widget.photo.id}';
+      final savePath = '${directory.path}/${photo.id}';
       /* await Dio(
         BaseOptions(connectTimeout: const Duration(seconds: 5)),
       ).download(widget.photo.linkDownload!, savePath); */
       final Client client = Client();
-      final response = await client.get(Uri.parse(widget.photo.linkDownload!));
+      final response = await client.get(Uri.parse(photo.linkDownload!));
       client.close();
       if (response.statusCode == 200) {
         file = await File(savePath).writeAsBytes(response.bodyBytes);
@@ -210,7 +244,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
       }
     } else {
       result = await Share.share(
-        '${widget.photo.linkDownload}',
+        '${photo.linkDownload}',
         subject: l10n.singleGreatPicture(appName),
       );
     }
@@ -257,7 +291,9 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
-    Photo photo = widget.photo;
+    //
+    // Photo photo = widget.photo;
+    //
     return Stack(
       children: [
         Scaffold(
@@ -267,7 +303,13 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               maxLines: 1,
               overflow: TextOverflow.fade,
             ),
-            actions: const [PopMenu()],
+            actions: [
+              IconButton(
+                onPressed: refreshUrlImage,
+                icon: const Icon(Icons.sync),
+              ),
+              const PopMenu(),
+            ],
           ),
           body: SafeArea(
             child: Column(
@@ -312,7 +354,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
             children: [
               FloatingActionButton.small(
                 heroTag: null,
-                onPressed: favoriteImage,
+                onPressed: toggleFavorite,
                 shape: const CircleBorder(),
                 child: isFavorite
                     ? const Icon(

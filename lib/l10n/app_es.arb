@@ -40,7 +40,7 @@
     "singleDownloadLinkNotFound": "Enlace de descarga no encontrado",
     "singleAuthorizationFailed": "Error de autorización",
     "singleServerFailed": "Error en la respuesta del servidor",
-    "singleErrorDownloading": "Error descargando la imagen {message}",
+    "singleErrorDownloading": "Error descargando la imagen: {message}",
     "singleDownloadedAt": "Imagen descargada en {message}",
     "singleDownloadAborted": "Proceso de descarga abortado. Puede que la licencia no admita la descarga directa",
     "singleGreatPicture": "Gran foto desde {appName}",
@@ -56,9 +56,11 @@
     "aboutIntro2": "La aplicación accede a las fotos de las plataformas a través de su API y no tiene relación oficial con ninguna de ellas. Cada plataforma es propietaria de su marca registrada y logotipo y esta aplicación no está patrocinada ni respaldada por ninguna.",
     "aboutIntro3": "La app permite utilizar algunos filtros para buscar fotos, como el color predominante y la orientación, aunque no todas las plataformas soportan estos filtros.",
     "aboutIntro4": "La aplicación presenta las imágenes y la información asociada en diferentes diseños, y permite realizar algunas acciones sobre las imágenes: marcar, hacer zoom, compartir y descargar en tu dispositivo.",
+    "aboutIntro5": "Desde la acción de descarga, la aplicación intenta obtener la imagen original, pero cuando esa opción no está disponible (por limitación del servidor o cualquier otra razón) entonces se intenta descargar la imagen con el mayor tamaño posible.",
+    "aboutIntro6": "Use la sección de favoritos como un almacen temporal que casi no ocupa memoria. Ten en cuenta que no se guardan imágenes, solo los enlaces y datos de esa imagen, y algunas plataformas generan enlaces dinámicos que actualizan cada cierto tiempo, por lo que es posible que algunas funciones (como descargar o hacer zoom) dejen de funcionar en algunos favoritos guardados (solo aplicable a algunas plataformas). También es posible que una imagen guardada en favoritos deje de estar disponible en la plataforma. Si tiene intención de utilizar las imágenes en el futuro, mejor descárguelas en su dispositivo.",
     "aboutAuthor":  "## Autor y Licencia",
     "aboutLicense": "Esta aplicación se comparte libremente bajo los términos de la *GNU General Public License v.3* con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA. Este programa es **software libre**: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, versión 3 (GPLv3). La Licencia Pública General GNU no permite incorporar este programa a programas propietarios.",
-    "aboutSupport": "## Apoyo",
+    "aboutSupport": "## Participa",
     "aboutSupport1": "**PhotoTook** es *software libre y de código abierto*. Por favor, considera contribuir para mantener activo el desarrollo de esta App. Muchas gracias.",
     "aboutSupport2": "Agradecemos cualquier sugerencia, crítica, comentario o informe de errores. ¿Crees que has encontrado un problema? Identificar y corregir errores hace que esta aplicación sea mejor para todos. Informa de un error en [GitHub issues]({urlGitHubIssues}).",
     "aboutSupport3": "Puedes ayudar al desarrollo de esta y otras aplicaciones con una pequeña contribución a través de PayPal o Bitcoins. Muchas gracias.",
@@ -68,6 +70,5 @@
     "aboutWarranty": "## Garantía, Seguridad y Privacidad",
     "aboutWarranty1": "**Aplicación gratuita y sin publicidad**. No se recaban ni utilizan datos del usuario. **Software de código abierto** (código fuente en Github), libre de spyware, malware, virus o cualquier proceso que amenace tu dispositivo o viole tu privacidad. Esta aplicación no extrae ni almacena ninguna información ni requiere ningún permiso externo, y renuncia a la publicidad y a cualquier mecanismo de rastreo.",
     "aboutWarranty2": "Cada plataforma tiene sus propios términos y condiciones y su propia política de privacidad y cookies, y las imágenes tienen diferentes tipos de licencia y derechos de propiedad para su uso.",
-    "aboutWarranty3": "No se puede garantizar que el contenido ofrecido esté libre de errores, ya sean errores en el servidor del que proceden los datos, en el proceso de acceso a los datos o en su tratamiento, por lo que la información presentada no tiene ninguna garantía, ni explícita ni implícita. El usuario acepta expresamente ser consciente de esta circunstancia. La utilización de la información obtenida por esta App se realiza por el usuario por su propia cuenta y riesgo, siendo el único responsable frente a terceros de cualquier daño o perjuicio que pudieran derivarse de la misma."   
-
+    "aboutWarranty3": "No se puede garantizar que el contenido ofrecido esté libre de errores, ya sean errores en el servidor del que proceden los datos, en el proceso de acceso a los datos o en su tratamiento, por lo que la información presentada no tiene ninguna garantía, ni explícita ni implícita. El usuario acepta expresamente ser consciente de esta circunstancia. La utilización de la información obtenida por esta App se realiza por el usuario por su propia cuenta y riesgo, siendo el único responsable frente a terceros de cualquier daño o perjuicio que pudieran derivarse de la misma."
 }

@@ -15,11 +15,15 @@ class NoImages extends StatelessWidget {
               const Spacer(),
               Text(
                 message,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                textAlign: TextAlign.center,
               ),
               Expanded(
                 child: Icon(
                   Icons.image_not_supported,
+                  color: Theme.of(context).colorScheme.secondary,
                   size: constraint.maxHeight / 2,
                 ),
               ),

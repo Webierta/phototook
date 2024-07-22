@@ -2,15 +2,12 @@ import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/photo.dart';
+import 'no_images.dart';
 
 class CachedImage extends StatelessWidget {
   final Photo photo;
   final BoxFit fit;
-  const CachedImage({
-    super.key,
-    required this.photo,
-    required this.fit,
-  });
+  const CachedImage({super.key, required this.photo, required this.fit});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +38,8 @@ class CachedImage extends StatelessWidget {
         return const Icon(Icons.image_not_supported);
       }, */
       errorBuilder: (context, exception, stacktrace) {
-        return LayoutBuilder(builder: (context, constraint) {
+        return const NoImages(message: 'Image not found');
+        /* return LayoutBuilder(builder: (context, constraint) {
           return SizedBox(
             height: constraint.biggest.height,
             child: Column(
@@ -61,7 +59,7 @@ class CachedImage extends StatelessWidget {
               ],
             ),
           );
-        });
+        }); */
       },
     );
   }

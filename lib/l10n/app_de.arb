@@ -1,0 +1,73 @@
+{
+    "@@locale": "de",
+
+    "searchHomeSearch": "Suchen",
+    "searchHomeError": "Es gab einen Fehler, den die Fotos zu erhalten",
+    "searchHomeFilters": "Filter",
+    "searchHomeByTopic": "Suche nach Thema",
+    "topics": "tiere:architekturinterieur:geschichte:business-work:aktuelleevents:experimental:fashion-beauty:film:food-drink:gesundheit:natur:menschen:spiritualität:sport:street:technologie:textures-patterns:reise:tapeten:hintergrundbilder:3d-renders",
+    "@topics": {
+        "description": "themen"
+    },
+
+    "bottomSheetFilterByOrientation": "Filter durch Orientierung",
+    "bottomSheetFilterByColor": "Filter durch Farbe",
+    "bottomSheetFilterClean": "Sauber",
+    "bottomSheetFilterOk": "Ok",             
+    "bottomSheetFilterOrientation": "{OrientationFilter, select, landscape{Landschaft} portrait{Porträt} squarish{quadratisch} other{unknown}}",
+
+    "albumNoImages": "Kein Bild gefunden",
+
+    "favoritesAppBar": "Favoritinnen",
+    "favoritesConfirmDelete": "Löschen bestätigen",
+    "favoritesRemoveAll": "Dies wird alle Favoriten entfernen",
+    "favoritesCancel": "Stornieren",
+    "favoritesOk": "Ok",
+    "favoritesNoImages": "Es gibt keine Favoriten",
+    
+    "settingsAppBar": "Einstellungen",
+    "settingsLanguage": "Sprache",
+    "settingsThemeLight": "Themenlicht",
+    "settingsNumberColumns": "Anzahl der Spalten auf der Ergebnisseite",    
+    "settingsRemoveCache": "Entfernen Sie den Cache aus den Bildern",
+    "settingsCacheRemoved": "Cache -Speicher entfernt",
+    "settingsSize": "Größe",
+    "settingsSavedSettings": "Gespeicherte Einstellungen",
+    "settingsSave": "Einstellungen speichern",
+
+    "singleFavoriteAdd": "Favoriten hinzugefügt",
+    "singleFavoriteDeleted": "Gelöschter Favorit",
+    "singleDownloadLinkNotFound": "Download -Link nicht gefunden",
+    "singleAuthorizationFailed": "Autorisation fehlgeschlagen",
+    "singleServerFailed": "Die Serverantwort fehlgeschlagen",
+    "singleErrorDownloading": "Fehler beim Herunterladen von Bild: {message}",
+    "singleDownloadedAt": "Bild heruntergeladen bei {message}",
+    "singleDownloadAborted": "Download -Prozess abgebrochen.Die Lizenz unterstützt möglicherweise keinen direkten Download",
+    "singleGreatPicture": "Tolles Bild von {appName}",
+    "singleGetError": "Es gab einen Fehler, den die Fotos zu erhalten",
+    "singleNoTitle": "Kein Titel",
+
+    "cardViewError": "Es gab einen Fehler, den die Fotos zu erhalten",
+
+    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favoritinnen} settings{Einstellungen} about{About} other{andere}}",
+
+    "aboutSubtitle": "#### Meta -Suchmaschine für Fotos auf den besten Images -Plattformen",
+    "aboutIntro1": "**PhotoTook** Sucht nach Fotos auf Top -Image -Plattformen, einschließlich Unplash, Pexels, Flickr, Pixabay und OpenSverse.In zukünftigen Überarbeitungen können diese Quellen geändert oder erweitert werden.",
+    "aboutIntro2": "Die App greift über ihre API von den Plattformen auf Fotos zu und hat keine offizielle Beziehung zu ihnen.Jede Plattform besitzt ihre eingetragene Marken- und Logo, und diese Anwendung wird von keinem von einer gesponsert oder unterstützt.",
+    "aboutIntro3": "Phototook sucht nach Fotos auf Top -Image -Plattformen, einschließlich Unplash, Pxels, Flickr, Pixabay und Openverse.In zukünftigen Überarbeitungen können diese Quellen geändert oder erweitert werden.",
+    "aboutIntro4": "Phototook sucht nach Fotos auf Top -Image -Plattformen, einschließlich Unplash, Pxels, Flickr, Pixabay und Openverse.In zukünftigen Überarbeitungen können diese Quellen geändert oder erweitert werden.",
+    "aboutIntro5": "Bei der Download-Aktion versucht die Anwendung, das Originalbild zu erhalten, aber wenn diese Option nicht verfügbar ist (aufgrund von Serverbeschränkungen oder aus anderen Gründen), versucht sie, das Bild mit der größtmöglichen Größe herunterzuladen.",
+    "aboutIntro6": "Verwenden Sie den Favoritenbereich als temporären Speicher, der fast keinen Speicherplatz benötigt. Beachten Sie, dass keine Bilder gespeichert werden, sondern nur die Links und Daten für dieses Bild, und dass einige Plattformen dynamische Links generieren, die von Zeit zu Zeit aktualisiert werden, so dass es möglich ist, dass einige Funktionen (wie das Herunterladen oder Zoomen) bei einigen gespeicherten Lesezeichen nicht mehr funktionieren (gilt nur für einige Plattformen). Es ist auch möglich, dass ein in den Favoriten gespeichertes Bild nicht mehr auf der Plattform verfügbar ist. Wenn Sie die Bilder in Zukunft verwenden möchten, laden Sie sie am besten auf Ihr Gerät herunter.",
+    "aboutLicense": "Diese App wird unter den Bedingungen der allgemeinen öffentlichen Lizenz von * gnu frei geteilt.Dieses Programm ist ** Free Software **: Sie können es neu verteilen und/oder unter den Bedingungen der GNU General Public Lizenz wie von der Free Software Foundation, Version 3 (GPLV3) veröffentlicht.Die GNU General Public Lizenz erlaubt es nicht, dieses Programm in proprietäre Programme einzubeziehen.",
+    "aboutSupport": "## Unterstützung",
+    "aboutSupport1": "**Phototook** ist *kostenlose und Open -Source -Software*.Bitte überlegen Sie, ob die Entwicklung dieser App aktiv bleibt.Danke schön.",
+    "aboutSupport2": "Alle Vorschläge, Kritik, Kommentare oder Fehlerberichte werden geschätzt.Glaubst du, du hast ein Problem gefunden?Wenn Sie Fehler identifizieren und beheben, wird diese App für alle besser.Einen Fehler melden [GitHub issues]({urlGitHubIssues}).",
+    "aboutSupport3": "Sie können die Entwicklung dieser und anderer Apps mit einem kleinen Beitrag über PayPal oder Bitcoins helfen.Danke schön!",
+    "aboutPaypal": "Spenden Sie über PayPal (öffnet PayPal -Zahlungsseite):",
+    "aboutBTC1": "Um eine Spende in Bitcoins zu leisten, scannen Sie diesen QR -Code mit Ihrer Brieftaschen -App:",
+    "aboutBTC2": "Oder kopieren Sie meine BTC -Brieftaschenadresse:",
+    "aboutWarranty": "## Garantie, Sicherheit und Privatsphäre",
+    "aboutWarranty1": "**Kostenlose und werbefreie Anwendung**. Es werden keine Benutzerdaten verwendet. **Open Source -Software** (Quellcode auf GitHub), frei von Spyware, Malware, Viren oder einem Prozess, der Ihr Gerät bedroht oder gegen Ihre Privatsphäre verstößt.Diese Anwendung extrahiert oder speichert keine Informationen oder erfordert eine externe Berechtigung und verzichtet auf Werbung und Verfolgungsmechanismus.",
+    "aboutWarranty2": "Jede Plattform hat ihre eigenen Allgemeinen Geschäftsbedingungen und ihre eigene Privatsphäre und Cookie -Richtlinien, und Bilder haben unterschiedliche Arten von Lizenz- und Eigentumsrechten für ihre Verwendung.",
+    "aboutWarranty3": "Es kann nicht garantiert werden, dass der angebotene Inhalt fehlerfrei ist, unabhängig davon.Der Benutzer stimmt ausdrücklich zu, sich dieser Umstände bewusst zu sein.Die Verwendung der von dieser App erhaltenen Informationen wird vom Benutzer auf eigene Risiko und Kosten durchgeführt, und er ist ausschließlich gegenüber Dritten verantwortlich für Schäden, die sich daraus ergeben können."    
+}

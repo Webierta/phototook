@@ -61,8 +61,18 @@ class AboutScreen extends ConsumerWidget {
                   ),
                   MarkdownText(data: l10n.aboutIntro1),
                   MarkdownText(data: l10n.aboutIntro2),
-                  MarkdownText(data: l10n.aboutIntro3),
+                  //MarkdownText(data: l10n.aboutIntro3),
                   MarkdownText(data: l10n.aboutIntro4),
+                  Center(
+                    child: Icon(
+                      Icons.contact_support,
+                      size: 48,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  MarkdownText(data: l10n.aboutIntro3),
+                  MarkdownText(data: l10n.aboutIntro5),
+                  MarkdownText(data: l10n.aboutIntro6),
                   Divider(
                     color: Theme.of(context).colorScheme.secondary,
                     thickness: 0.4,

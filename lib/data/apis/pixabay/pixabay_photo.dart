@@ -42,7 +42,8 @@ class PixabayPhoto extends Photo {
       urlMD: json["webformatURL"],
       urlHD: json["largeImageURL"],
       link: json["pageURL"],
-      linkDownload: json["fullHDURL"] ?? json["largeImageURL"],
+      //linkDownload: json["fullHDURL"] ?? json["largeImageURL"],
+      linkDownload: json["largeImageURL"],
       tags: (json["tags"] == null || json["tags"]!.isEmpty)
           ? null
           : List<String>.from(json["tags"]!.split(', ')),

@@ -25,6 +25,15 @@ class RequestApi {
   RequestApi({required this.querySent}) : client = Client();
 
   Future<List<Photo>> get searchPhotos async {
+    if (querySent.photo?.id != null) {
+      var server = querySent.photo?.server;
+      List<Photo> photosFromServer =
+          await getPhotosFromServer(server!.getServerApi(querySent));
+      totalPhotos.addAll(photosFromServer);
+      client.close();
+      return totalPhotos;
+    }
+
     for (var server in Server.values) {
       if (server == Server.flickr &&
           (querySent.filter?.color != null ||

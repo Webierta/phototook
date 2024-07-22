@@ -40,7 +40,7 @@
     "singleDownloadLinkNotFound": "Download link not found",
     "singleAuthorizationFailed": "Authorization failed",
     "singleServerFailed": "Server response failed",
-    "singleErrorDownloading": "Error downloading image {message}",
+    "singleErrorDownloading": "Error downloading image: {message}",
     "singleDownloadedAt": "Image downloaded at {message}",
     "singleDownloadAborted": "Download process aborted. The license may not support direct download",
     "singleGreatPicture": "Great picture from {appName}",
@@ -56,6 +56,8 @@
     "aboutIntro2": "The app accesses photos from the platforms through their API and has no official relationship with any of them. Each platform owns its registered trademark and logo and this application is not sponsored or supported by any.",
     "aboutIntro3": "PhotoTook searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.",
     "aboutIntro4": "PhotoTook searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.",
+    "aboutIntro5": "From the download action, the application tries to get the original image, but when that option is not available (due to server limitation or any other reason) then it tries to download the image with the largest possible size",
+    "aboutIntro6": "Use the favorites section as a temporary storage that takes up almost no memory. Note that no images are saved, only the links and data of that image, and some platforms generate dynamic links that update from time to time, so it is possible that some functions (such as downloading or zooming) may stop working on some saved favorites (only applicable to some platforms). It is also possible that an image saved in favorites may no longer be available on the platform. If you intend to use the images in the future, it is best to download them to your device.",
     "aboutAuthor":  "## Author and License",
     "aboutLicense": "This app is freely shared under the terms of the *GNU General Public License v.3* in the hope that it will be useful, but WITHOUT ANY WARRANTY. This program is **free software**: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 (GPLv3). The GNU General Public License does not permit incorporating this program into proprietary programs.",
     "aboutSupport": "## Support",
@@ -68,6 +70,5 @@
     "aboutWarranty": "## Warranty, Security and Privacy",
     "aboutWarranty1": "**Free and ad-free application**. No user data is used. **Open source software** (source code on Github), free of spyware, malware, viruses or any process that threatens your device or violates your privacy. This application does not extract or store any information or require any external permission, and renounces advertising and any tracking mechanism.",
     "aboutWarranty2": "Each platform has its own terms and conditions and its own privacy and cookie policy, and images have different types of license and property rights for their use.",
-    "aboutWarranty3": "It cannot be guaranteed that the content offered is free of errors, whether errors in the server from which the data originates, in the process of accessing the data or in its processing, so the information presented does not have any guarantee, either explicit or implicit. The user expressly agrees to be aware of this circumstance. The use of the information obtained by this App is carried out by the user at his own risk and expense, and he is solely responsible to third parties for any damages that may arise from it."
-    
+    "aboutWarranty3": "It cannot be guaranteed that the content offered is free of errors, whether errors in the server from which the data originates, in the process of accessing the data or in its processing, so the information presented does not have any guarantee, either explicit or implicit. The user expressly agrees to be aware of this circumstance. The use of the information obtained by this App is carried out by the user at his own risk and expense, and he is solely responsible to third parties for any damages that may arise from it."    
 }

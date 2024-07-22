@@ -146,6 +146,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                             label: switch (value) {
                               'en' => 'English',
                               'es' => 'Español',
+                              'de' => 'Deutsch',
                               _ => 'English',
                             },
                           );
