@@ -94,7 +94,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     checkFavorite();
   }
 
-  refreshUrlImage() async {
+  /* refreshUrlImage() async {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     Photo updatePhoto;
     final querySent = QuerySent(query: 'test', page: 1, photo: photo);
@@ -121,7 +121,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
       );
       return;
     }
-  }
+  } */
 
   Future<void> downloadImage() async {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -303,12 +303,12 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               maxLines: 1,
               overflow: TextOverflow.fade,
             ),
-            actions: [
-              IconButton(
+            actions: const [
+              /* IconButton(
                 onPressed: refreshUrlImage,
                 icon: const Icon(Icons.sync),
-              ),
-              const PopMenu(),
+              ), */
+              PopMenu(),
             ],
           ),
           body: SafeArea(

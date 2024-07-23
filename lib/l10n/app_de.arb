@@ -14,7 +14,7 @@
     "bottomSheetFilterByColor": "Filter durch Farbe",
     "bottomSheetFilterClean": "Sauber",
     "bottomSheetFilterOk": "Ok",             
-    "bottomSheetFilterOrientation": "{OrientationFilter, select, landscape{Landschaft} portrait{Porträt} squarish{quadratisch} other{unknown}}",
+    "bottomSheetFilterOrientation": "{OrientationFilter, select, landscape{Landschaft} portrait{Porträt} squarish{quadratisch} other{unbekannt}}",
 
     "albumNoImages": "Kein Bild gefunden",
 
@@ -49,7 +49,7 @@
 
     "cardViewError": "Es gab einen Fehler, den die Fotos zu erhalten",
 
-    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favoritinnen} settings{Einstellungen} about{About} other{andere}}",
+    "popMenuOptionScreen": "{OptionScreen, select, favorites{Favoritinnen} settings{Einstellungen} about{About} other{unbekannt}}",
 
     "aboutSubtitle": "#### Meta -Suchmaschine für Fotos auf den besten Images -Plattformen",
     "aboutIntro1": "**PhotoTook** Sucht nach Fotos auf Top -Image -Plattformen, einschließlich Unplash, Pexels, Flickr, Pixabay und OpenSverse.In zukünftigen Überarbeitungen können diese Quellen geändert oder erweitert werden.",
@@ -58,6 +58,7 @@
     "aboutIntro4": "Phototook sucht nach Fotos auf Top -Image -Plattformen, einschließlich Unplash, Pxels, Flickr, Pixabay und Openverse.In zukünftigen Überarbeitungen können diese Quellen geändert oder erweitert werden.",
     "aboutIntro5": "Bei der Download-Aktion versucht die Anwendung, das Originalbild zu erhalten, aber wenn diese Option nicht verfügbar ist (aufgrund von Serverbeschränkungen oder aus anderen Gründen), versucht sie, das Bild mit der größtmöglichen Größe herunterzuladen.",
     "aboutIntro6": "Verwenden Sie den Favoritenbereich als temporären Speicher, der fast keinen Speicherplatz benötigt. Beachten Sie, dass keine Bilder gespeichert werden, sondern nur die Links und Daten für dieses Bild, und dass einige Plattformen dynamische Links generieren, die von Zeit zu Zeit aktualisiert werden, so dass es möglich ist, dass einige Funktionen (wie das Herunterladen oder Zoomen) bei einigen gespeicherten Lesezeichen nicht mehr funktionieren (gilt nur für einige Plattformen). Es ist auch möglich, dass ein in den Favoriten gespeichertes Bild nicht mehr auf der Plattform verfügbar ist. Wenn Sie die Bilder in Zukunft verwenden möchten, laden Sie sie am besten auf Ihr Gerät herunter.",
+    "aboutAuthor":  "## Autor und Lizenz",
     "aboutLicense": "Diese App wird unter den Bedingungen der allgemeinen öffentlichen Lizenz von * gnu frei geteilt.Dieses Programm ist ** Free Software **: Sie können es neu verteilen und/oder unter den Bedingungen der GNU General Public Lizenz wie von der Free Software Foundation, Version 3 (GPLV3) veröffentlicht.Die GNU General Public Lizenz erlaubt es nicht, dieses Programm in proprietäre Programme einzubeziehen.",
     "aboutSupport": "## Unterstützung",
     "aboutSupport1": "**Phototook** ist *kostenlose und Open -Source -Software*.Bitte überlegen Sie, ob die Entwicklung dieser App aktiv bleibt.Danke schön.",

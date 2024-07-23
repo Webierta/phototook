@@ -139,7 +139,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
                                   padding: const EdgeInsets.only(top: 20),
                                   child: TextField(
                                     controller: queryController,
-                                    autofocus: true,
+                                    //autofocus: true,
                                     maxLines: 1,
                                     decoration: InputDecoration(
                                       border: const OutlineInputBorder(),
@@ -158,9 +158,7 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
                                           searchQuery(filter);
                                         },
                                         icon: const CircleAvatar(
-                                          child: Icon(
-                                            Icons.search,
-                                          ),
+                                          child: Icon(Icons.search),
                                         ),
                                       ),
                                     ),

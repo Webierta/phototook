@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:phototook/ui/states/grid_columns_provider.dart';
 
 import '../../../data/models/settings.dart';
 import '../../../utils/globals.dart' as globals;
 import '../../../utils/local_storage.dart';
+import '../../../utils/locales_app.dart';
+import '../../states/grid_columns_provider.dart';
 import '../../states/settings_provider.dart';
 import '../../styles/styles_app.dart';
 
@@ -29,11 +30,6 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
   late String lang;
   late bool isDarkTheme;
   late int albumColumns;
-
-  final List<String> locales =
-      AppLocalizations.supportedLocales // [Locale('en'), Locale('es')]
-          .map((locale) => (locale.languageCode))
-          .toList();
 
   @override
   void initState() {
@@ -139,16 +135,11 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                               )); */
                           ref.read(settingsProvider.notifier).setLang(value!);
                         },
-                        dropdownMenuEntries: locales
-                            .map<DropdownMenuEntry<String>>((String value) {
+                        dropdownMenuEntries:
+                            LocalesApp.langCodes.map((String code) {
                           return DropdownMenuEntry<String>(
-                            value: value,
-                            label: switch (value) {
-                              'en' => 'English',
-                              'es' => 'Español',
-                              'de' => 'Deutsch',
-                              _ => 'English',
-                            },
+                            value: code,
+                            label: LocalesApp().langName(code),
                           );
                         }).toList(),
                       ),
