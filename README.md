@@ -1,6 +1,8 @@
 # PhotoTook
 
-Photo metasearch engine: Search in the best image banks, find on PhotoTook
+![PhotoTook Logo](https://github.com/Webierta/phototook/blob/main/fastlane/metadata/android/en-US/images/logo.png?raw=true "PhotoTook Logo")
+
+## PHOTO METASEARCH ENGINE: SEARCH IN THE BEST IMAGE BANKS, FIND ON PHOTOTOOK
 
 **PhotoTook** searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.
 
