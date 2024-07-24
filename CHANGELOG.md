@@ -7,7 +7,12 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Fastlane
+- Screenshots.
+- Fastlane.
+
+### Fixed
+
+- Translations.
 
 ### Changed
 
@@ -17,7 +22,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Alpha version
+- Alpha version.
 - Project start.
 
 
