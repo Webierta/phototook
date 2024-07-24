@@ -51,7 +51,7 @@
 
     "popMenuOptionScreen": "{OptionScreen, select, favorites{Favoritinnen} settings{Einstellungen} about{About} other{unbekannt}}",
 
-    "aboutSubtitle": "#### Meta -Suchmaschine für Fotos auf den besten Images -Plattformen",
+    "aboutSubtitle": "#### FOTO-METASUCHMASCHINE: SUCHE IN DEN BESTEN BILDDATENBANKEN, FINDEN IN PHOTOTOOK",
     "aboutIntro1": "**PhotoTook** Sucht nach Fotos auf Top -Image -Plattformen, einschließlich Unplash, Pexels, Flickr, Pixabay und OpenSverse.In zukünftigen Überarbeitungen können diese Quellen geändert oder erweitert werden.",
     "aboutIntro2": "Die App greift über ihre API von den Plattformen auf Fotos zu und hat keine offizielle Beziehung zu ihnen.Jede Plattform besitzt ihre eingetragene Marken- und Logo, und diese Anwendung wird von keinem von einer gesponsert oder unterstützt.",
     "aboutIntro3": "Die App ermöglicht es Ihnen, einige Filter für die Suche nach Fotos zu verwenden, z. B. die vorherrschende Farbe und die Ausrichtung, obwohl nicht alle Plattformen diese Filter unterstützen.",
