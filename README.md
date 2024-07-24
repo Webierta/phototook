@@ -4,9 +4,7 @@
 
 ### PHOTO METASEARCH ENGINE: SEARCH IN THE BEST IMAGE BANKS, FIND IN PHOTOTOOK
 
-Photo meta search engine: Search in the best image banks, find in PhotoTook.
-
-**PhotoTook** searches for photos on top image platforms, including Unsplash, Pexels, Flickr, Pixabay and Openverse. In future revisions, these sources may be modified or expanded.
+**PhotoTook** searches for photos on top image platforms, including *Unsplash*, *Pexels*, *Flickr*, *Pixabay* and *Openverse*. In future revisions, these sources may be modified or expanded.
 
 The app accesses photos from the platforms through their API and has no official relationship with any of them. Each platform owns its registered trademark and logo and this application is not sponsored or supported by any.
 
