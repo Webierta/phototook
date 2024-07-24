@@ -1,0 +1,6 @@
+PhotoTook busca fotos en las mejores plataformas de imágenes, como Unsplash, Pexels, Flickr, Pixabay y Openverse. En futuras revisiones, es posible que estas fuentes se modifiquen o amplíen.
+
+La aplicación accede a las fotos de las plataformas a través de su API y no tiene relación oficial con ninguna de ellas. Cada plataforma es propietaria de su marca registrada y logotipo y esta aplicación no está patrocinada ni respaldada por ninguna.
+
+La aplicación presenta las imágenes y la información asociada en diferentes diseños, y permite realizar algunas acciones sobre las imágenes: marcar, hacer zoom, compartir y descargar en tu dispositivo.
+
