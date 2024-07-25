@@ -5,7 +5,8 @@
     "searchHomeError": "Es gab einen Fehler, den die Fotos zu erhalten",
     "searchHomeFilters": "Filter",
     "searchHomeByTopic": "Suche nach Thema",
-    "topics": "tiere:architekturinterieur:geschichte:business-work:aktuelleevents:experimental:fashion-beauty:film:food-drink:gesundheit:natur:menschen:spiritualität:sport:street:technologie:textures-patterns:reise:tapeten:hintergrundbilder:3d-renders",
+    "topics":
+    "tiere:architektur-design:geschichte:arbeit-geschaeft:aktuelles:mode:kunst:essen-trinken:gesundheit:natur:menschen:sport:strasse:technologie:texturen-muster:reisen:hintergrundbilder:wissenschaft",
     "@topics": {
         "description": "themen"
     },

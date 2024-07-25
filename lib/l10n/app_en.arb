@@ -5,7 +5,8 @@
     "searchHomeError": "There was an error getting the photos",
     "searchHomeFilters": "Filters",
     "searchHomeByTopic": "Search by topic",
-    "topics": "animals:architecture-interior:history:business-work:current-events:experimental:fashion-beauty:film:food-drink:health:nature:people:spirituality:sports:street:technology:textures-patterns:travel:wallpapers:3d-renders",
+    "topics":
+    "animals:architecture-design:history:work-business:actuality:fashion:art:food-drink:health:nature:people:sports:street:technology:textures-patterns:travel:wallpapers:science",
     "@topics": {
         "description": "topics"
     },

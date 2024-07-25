@@ -1,6 +1,6 @@
 const String appName = 'PhotoTook';
 
-const String version = '0.1.0';
+const String version = '1.0.0';
 
 const String fontLogo = 'MajorMonoDisplay';
 

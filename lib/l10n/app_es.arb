@@ -5,7 +5,7 @@
     "searchHomeError": "Se ha producido un error obteniendo las fotos",
     "searchHomeFilters": "Filtros",
     "searchHomeByTopic": "Buscar por tema",
-    "topics": "animales:arquitectura-diseño:historia:trabajo-negocios:actualidad:experimental:moda:cine:comida-bebida:salud:naturaleza:gente:espiritualidad:deportes:calle:tecnología:texturas-patrones:viajes:fondos de pantalla:3d-renders",
+    "topics": "animales:arquitectura-diseño:historia:trabajo-negocios:actualidad:moda:arte:comida-bebida:salud:naturaleza:gente:deportes:calle:tecnología:texturas-patrones:viajes:fondos de pantalla:ciencia",
     "@topics": {
         "description": "topics"
     },  
