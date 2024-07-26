@@ -47,6 +47,7 @@
     "singleGreatPicture": "Tolles Bild von {appName}",
     "singleGetError": "Es gab einen Fehler, den die Fotos zu erhalten",
     "singleNoTitle": "Kein Titel",
+    "singleFiletypeError": "Prozess abgebrochen: Das Bildformat konnte nicht ermittelt werden",
 
     "cardViewError": "Es gab einen Fehler, den die Fotos zu erhalten",
 

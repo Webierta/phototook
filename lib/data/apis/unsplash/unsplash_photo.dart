@@ -23,28 +23,43 @@ class UnsplashPhoto extends Photo {
     super.description,
     super.license,
     super.source,
+    super.filetype,
   });
 
-  factory UnsplashPhoto.fromJson(Map<String, dynamic> json) => UnsplashPhoto(
-        server: Server.unsplash,
-        id: json["id"],
-        width: json["width"],
-        height: json["height"],
-        url: Urls.fromJson(json["urls"]).small!,
-        author: User.fromJson(json["user"]).name!,
-        authorUrl: User.fromJson(json["user"]).links?.html,
-        authorImage: User.fromJson(json["user"]).profileImage?.medium,
-        title: json["alt_description"],
-        description: json["description"],
-        urlLD: Urls.fromJson(json["urls"]).thumb,
-        urlMD: Urls.fromJson(json["urls"]).small,
-        urlHD: Urls.fromJson(json["urls"]).regular,
-        link: ResultLinks.fromJson(json["links"]).html,
-        linkDownload: ResultLinks.fromJson(json["links"]).download,
-        tags: List<String>.from(
-          json["tags"]!.map((tag) => Tag.fromJson(tag).title),
-        ),
-      );
+  factory UnsplashPhoto.fromJson(Map<String, dynamic> json) {
+    String? filetype;
+    if (Urls.fromJson(json["urls"]).small != null &&
+        Urls.fromJson(json["urls"]).small!.isNotEmpty) {
+      String urlSmall = Urls.fromJson(json["urls"]).small!;
+      //filetype = urlSmall.substring(urlSmall.lastIndexOf('.') + 1);
+      var index1 = urlSmall.indexOf('fm=');
+      var sub1 = urlSmall.substring(index1 + 3);
+      var index2 = sub1.indexOf('&');
+      filetype = sub1.substring(0, index2);
+    }
+
+    return UnsplashPhoto(
+      server: Server.unsplash,
+      id: json["id"],
+      width: json["width"],
+      height: json["height"],
+      url: Urls.fromJson(json["urls"]).small!,
+      author: User.fromJson(json["user"]).name!,
+      authorUrl: User.fromJson(json["user"]).links?.html,
+      authorImage: User.fromJson(json["user"]).profileImage?.medium,
+      title: json["alt_description"],
+      description: json["description"],
+      urlLD: Urls.fromJson(json["urls"]).thumb,
+      urlMD: Urls.fromJson(json["urls"]).small,
+      urlHD: Urls.fromJson(json["urls"]).regular,
+      link: ResultLinks.fromJson(json["links"]).html,
+      linkDownload: ResultLinks.fromJson(json["links"]).download,
+      tags: List<String>.from(
+        json["tags"]!.map((tag) => Tag.fromJson(tag).title),
+      ),
+      filetype: filetype,
+    );
+  }
 }
 
 class AlternativeSlugs {

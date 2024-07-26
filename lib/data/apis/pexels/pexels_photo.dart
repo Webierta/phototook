@@ -21,24 +21,35 @@ class PexelsPhoto extends Photo {
     super.description,
     super.license,
     super.source,
+    super.filetype,
   });
 
-  factory PexelsPhoto.fromJson(Map<String, dynamic> json) => PexelsPhoto(
-        server: Server.pexels,
-        id: json["id"].toString(),
-        width: json["width"],
-        height: json["height"],
-        url: Src.fromJson(json["src"]).medium!,
-        author: json["photographer"],
-        authorUrl: json["photographer_url"],
-        title: json["alt"],
-        description: json["alt"],
-        urlLD: Src.fromJson(json["src"]).small,
-        urlMD: Src.fromJson(json["src"]).medium,
-        urlHD: Src.fromJson(json["src"]).large,
-        link: json["url"],
-        linkDownload: Src.fromJson(json["src"]).original,
-      );
+  factory PexelsPhoto.fromJson(Map<String, dynamic> json) {
+    String? filetype;
+    if (Src.fromJson(json["src"]).original != null &&
+        Src.fromJson(json["src"]).original!.isNotEmpty) {
+      String srcOriginal = Src.fromJson(json["src"]).original!;
+      filetype = srcOriginal.substring(srcOriginal.lastIndexOf('.') + 1);
+    }
+
+    return PexelsPhoto(
+      server: Server.pexels,
+      id: json["id"].toString(),
+      width: json["width"],
+      height: json["height"],
+      url: Src.fromJson(json["src"]).medium!,
+      author: json["photographer"],
+      authorUrl: json["photographer_url"],
+      title: json["alt"],
+      description: json["alt"],
+      urlLD: Src.fromJson(json["src"]).small,
+      urlMD: Src.fromJson(json["src"]).medium,
+      urlHD: Src.fromJson(json["src"]).large,
+      link: json["url"],
+      linkDownload: Src.fromJson(json["src"]).original,
+      filetype: filetype,
+    );
+  }
 }
 
 class Src {

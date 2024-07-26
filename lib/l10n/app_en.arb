@@ -47,6 +47,7 @@
     "singleGreatPicture": "Great picture from {appName}",
     "singleGetError": "There was an error getting the photos",
     "singleNoTitle": "No title",
+    "singleFiletypeError": "Process aborted: unable to determine the image format",
 
     "cardViewError": "There was an error getting the photos",
 

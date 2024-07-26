@@ -21,6 +21,7 @@ class PixabayPhoto extends Photo {
     super.description,
     super.license,
     super.source,
+    super.filetype,
   });
 
   factory PixabayPhoto.fromJson(Map<String, dynamic> json) {
@@ -28,6 +29,12 @@ class PixabayPhoto extends Photo {
     authorUrl = json["user"] != null && json["user_id"] != null
         ? 'https://pixabay.com/users/${json["user"]}-${json["user_id"]}'
         : null;
+
+    String? filetype;
+    if (json["webformatURL"] != null && json["webformatURL"]!.isNotEmpty) {
+      var webFormatUrl = json["webformatURL"];
+      filetype = webFormatUrl.substring(webFormatUrl.lastIndexOf('.') + 1);
+    }
 
     return PixabayPhoto(
       server: Server.pixabay,
@@ -47,6 +54,7 @@ class PixabayPhoto extends Photo {
       tags: (json["tags"] == null || json["tags"]!.isEmpty)
           ? null
           : List<String>.from(json["tags"]!.split(', ')),
+      filetype: filetype,
     );
   }
 }

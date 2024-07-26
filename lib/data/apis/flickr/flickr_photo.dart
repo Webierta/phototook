@@ -21,6 +21,7 @@ class FlickrPhoto extends Photo {
     super.description,
     super.license,
     super.source,
+    super.filetype,
   });
 
   factory FlickrPhoto.fromJson(Map<String, dynamic> json) {
@@ -59,6 +60,7 @@ class FlickrPhoto extends Photo {
       license: license,
       title: json["title"],
       description: json["title"],
+      filetype: json["originalformat"],
     );
   }
 }

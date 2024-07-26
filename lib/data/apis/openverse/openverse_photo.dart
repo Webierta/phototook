@@ -21,6 +21,7 @@ class OpenversePhoto extends Photo {
     super.description,
     super.license,
     super.source,
+    super.filetype,
   });
 
   factory OpenversePhoto.fromJson(Map<String, dynamic> json) {
@@ -62,6 +63,7 @@ class OpenversePhoto extends Photo {
       tags: List<String>.from(
         json["tags"]!.map((tag) => Tag.fromJson(tag).name),
       ),
+      filetype: json["filetype"],
     );
   }
 }

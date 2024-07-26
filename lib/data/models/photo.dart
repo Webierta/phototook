@@ -19,6 +19,7 @@ abstract class Photo {
   final String? description;
   final String? license;
   final String? source;
+  String? filetype;
 
   Photo({
     required this.server,
@@ -39,6 +40,7 @@ abstract class Photo {
     this.description,
     this.license,
     this.source,
+    this.filetype,
   });
 
   @override
@@ -62,6 +64,7 @@ abstract class Photo {
     if (description != other.description) return false;
     if (license != other.license) return false;
     if (source != other.source) return false;
+    if (filetype != other.filetype) return false;
     return true;
   }
 

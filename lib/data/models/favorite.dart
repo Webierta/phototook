@@ -29,6 +29,7 @@ class Favorite extends Photo {
     super.description,
     super.license,
     super.source,
+    super.filetype,
   });
 
   factory Favorite.fromPhoto(Photo photo) => Favorite(
@@ -51,6 +52,7 @@ class Favorite extends Photo {
         description: photo.description,
         license: photo.license,
         source: photo.source,
+        filetype: photo.filetype,
       );
 
   factory Favorite.fromJson(Map<String, dynamic> json) => Favorite(
@@ -72,6 +74,7 @@ class Favorite extends Photo {
         description: json["description"],
         license: json["license"],
         source: json["source"],
+        filetype: json["filetype"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,5 +96,6 @@ class Favorite extends Photo {
         "description": description,
         "license": license,
         "source": source,
+        "filetype": filetype,
       };
 }

@@ -46,6 +46,7 @@
     "singleGreatPicture": "Gran foto desde {appName}",
     "singleGetError": "Ha ocurrido un error obteniendo las fotos",
     "singleNoTitle": "Sin título",
+    "singleFiletypeError": "Proceso abortado: imposible determinar el formato de la imagen",
 
     "cardViewError": "Se ha producido un error obteniendo las fotos",
 

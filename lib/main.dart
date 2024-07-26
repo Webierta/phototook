@@ -12,6 +12,7 @@ import 'ui/states/settings_provider.dart';
 import 'ui/styles/theme_app.dart';
 import 'utils/consts.dart';
 import 'utils/globals.dart' as globals;
+import 'utils/globals.dart';
 import 'utils/local_storage.dart';
 
 void main() async {
@@ -63,7 +64,7 @@ class MainAppState extends ConsumerState<MainApp> {
       debugShowCheckedModeBanner: false,
       // KEYS
       scaffoldMessengerKey: globals.scaffoldMessengerKey,
-      //navigatorKey: navigatorKey,
+      navigatorKey: navigatorKey,
       // THEME
       themeMode: settings.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeApp.lightThemeData,
