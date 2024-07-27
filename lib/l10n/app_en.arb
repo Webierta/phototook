@@ -39,8 +39,10 @@
     "settingsLevelInfo1": "The depth level determines the maximum number of images per page. This influences the loading time (along with other factors, such as Internet connection and image size). It can also affect the number of requests sent to the server.",
     "settingsLevelInfo2": "The low level gets images faster (maximum 100 per page) but requires more requests to get more results.",
     "settingsLevelInfo3": "The top level may take longer to load, but you get more images in a single request (all those supported by each platform, over 800 in total).",
-    "settingsLevelInfo4": "The average level is more balanced, obtaining a maximum of 300 images per page.",
-    "settingsLevelInfoClose": "Close",
+    "settingsLevelInfo4": "The average level is more balanced, obtaining a maximum of 300 images per page.",  
+    "settingsLevelLow": "Low level",
+    "settingsLevelMedium": "Medium level",
+    "settingsLevelMax": "Maximum level",
 
     "singleFavoriteAdd": "Added favorite",
     "singleFavoriteDeleted": "Deleted favorite",

@@ -39,7 +39,10 @@
     "settingsLevelInfo2": "El nivel bajo obtiene más rápidamente las imágenes (máximo 100 por página) pero requiere más solicitudes para obtener más resultados.",
     "settingsLevelInfo3": "El nivel máximo puede tardar más tiempo en cargar, pero se obtienen más imágenes en una sola solicitud (todas las soportadas por cada plataforma, más de 800 en total).",
     "settingsLevelInfo4": "El nivel medio es más equilibrado, obteniendo un máximo de 300 imágenes por página.",
-    "settingsLevelInfoClose": "Cerrar",
+    "settingsLevelLow": "Nivel bajo",
+    "settingsLevelMedium": "Nivel medio",
+    "settingsLevelMax": "Nivel máximo",
+
 
     "singleFavoriteAdd": "Favorito añadido",
     "singleFavoriteDeleted": "Favorito eliminado",

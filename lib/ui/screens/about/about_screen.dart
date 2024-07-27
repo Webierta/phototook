@@ -150,7 +150,7 @@ const String attributions = """
 
 ### Fonts:
 
-* Nunito. Copyright 2014 [The Nunito Project Authors](https://github.com/googlefonts/nunito). Licensed under the SIL Open Font License, Version 1.1.
+* Victor Mono. Copyright 2023 [The Victor Mono Project Authors](https://github.com/rubjo/victor-mono-font). Licensed under the SIL Open Font License, Version 1.1.
 
 * Major Mono Display. Copyright 2018 [The Major Mono Project Authors](https://github.com/googlefonts/majormono). Licensed under the SIL Open Font License, Version 1.1.
 

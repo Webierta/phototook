@@ -39,8 +39,10 @@
     "settingsLevelInfo1": "Die Tiefenstufe bestimmt die maximale Anzahl von Bildern pro Seite. Dies beeinflusst die Ladezeit (zusammen mit anderen Faktoren, wie Internetverbindung und Bildgröße). Sie kann auch die Anzahl der an den Server gesendeten Anfragen beeinflussen.",
     "settingsLevelInfo2": "Die niedrige Stufe holt die Bilder schneller (maximal 100 pro Seite), erfordert aber mehr Anfragen, um mehr Ergebnisse zu erhalten.",
     "settingsLevelInfo3": "Das Laden der obersten Ebene kann länger dauern, aber Sie erhalten mehr Bilder in einer einzigen Anfrage (alle von jeder Plattform unterstützten Bilder, insgesamt mehr als 800).",
-    "settingsLevelInfo4": "Das durchschnittliche Niveau ist ausgeglichener und liegt bei maximal 300 Bildern pro Seite.",
-    "settingsLevelInfoClose": "Schließen Sie",
+    "settingsLevelInfo4": "Das durchschnittliche Niveau ist ausgeglichener und liegt bei maximal 300 Bildern pro Seite.",   
+    "settingsLevelLow": "Geringes Niveau",
+    "settingsLevelMedium": "Mittleres Niveau",
+    "settingsLevelMax": "Höchstes Niveau",
 
     "singleFavoriteAdd": "Favoriten hinzugefügt",
     "singleFavoriteDeleted": "Gelöschter Favorit",

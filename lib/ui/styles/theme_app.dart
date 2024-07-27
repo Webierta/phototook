@@ -12,7 +12,7 @@ class ThemeApp {
       //scaffoldBackgroundColor: Colors.transparent,
       appBarTheme: const AppBarTheme(color: Colors.transparent),
       //textTheme: TextTheme(),
-      fontFamily: 'Nunito',
+      fontFamily: 'VictorMono',
       /* textTheme: const TextTheme(
         headlineLarge: TextStyle(
           fontWeight: FontWeight.w100,

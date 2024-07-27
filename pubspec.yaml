@@ -36,11 +36,11 @@ flutter:
     - assets/files/
     - assets/fonts/
     - assets/.env
-  fonts:
-    - family: Nunito
+  fonts: 
+    - family: VictorMono
       fonts:
-        - asset: assets/fonts/Nunito-Regular.ttf
-        - asset: assets/fonts/Nunito-ExtraLight.ttf
+        - asset: assets/fonts/VictorMono-Regular.ttf
+        - asset: assets/fonts/VictorMono-Thin.ttf   
     - family: MajorMonoDisplay
       fonts:
         - asset: assets/fonts/MajorMonoDisplay-Regular.ttf

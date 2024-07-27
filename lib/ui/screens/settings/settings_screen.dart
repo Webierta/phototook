@@ -105,6 +105,56 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     searchLevel = ref.watch(settingsProvider).searchLevel;
 
+    void showSearchLevelInfo(BuildContext context) {
+      Navigator.of(context).push(MaterialPageRoute<void>(
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('Info'),
+                leading: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: ListView(
+                  children: [
+                    Text(
+                      l10n.settingsLevel,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 14),
+                    Text(l10n.settingsLevelInfo1),
+                    const SizedBox(height: 14),
+                    Text(
+                      l10n.settingsLevelLow,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Text(l10n.settingsLevelInfo2),
+                    const SizedBox(height: 14),
+                    Text(
+                      l10n.settingsLevelMax,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Text(l10n.settingsLevelInfo3),
+                    const SizedBox(height: 14),
+                    Text(
+                      l10n.settingsLevelMedium,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Text(l10n.settingsLevelInfo4),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ));
+    }
+
     return Container(
       decoration: BoxDecoration(
         gradient: StylesApp.gradient(Theme.of(context).colorScheme),
@@ -174,8 +224,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const Divider(height: 24),
                     ListTile(
                       title: Text(l10n.settingsNumberColumns),
-                      leading: const Icon(Icons.view_module),
-                      titleAlignment: ListTileTitleAlignment.top,
+                      leading: const Icon(Icons.grid_on),
+                      titleAlignment: ListTileTitleAlignment.titleHeight,
                       //dense: true,
                       subtitle: Slider(
                         value: albumColumns.toDouble(),
@@ -184,23 +234,12 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                         divisions: 5,
                         label: '$albumColumns',
                         onChanged: (double value) {
-                          /*  setState(() {
-                            albumColumns = value.round();
-                          }); */
                           ref
                               .read(gridColumnsProvider.notifier)
                               .fit(value.toInt());
-                          /* ref.read(settingsProvider.notifier).setSettings(
-                              Settings(
-                                  idioma: lang,
-                                  isDarkTheme: isDarkTheme,
-                                  albumColumns: value.toInt())); */
                           ref
                               .read(settingsProvider.notifier)
                               .setAlbumColumns(value.toInt());
-                          /* ref
-                              .read(settingsProvider.notifier)
-                              .setAlbumColumns(value.toInt()); */
                         },
                       ),
                       trailing: CircleAvatar(
@@ -209,66 +248,60 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const Divider(height: 24),
                     ListTile(
-                      title: Row(
-                        children: [
-                          const Text('Nivel de profundidad de la búsqueda'),
-                          IconButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text(l10n.settingsLevel),
-                                      content: Column(
-                                        children: [
-                                          Text(l10n.settingsLevelInfo1),
-                                          const SizedBox(height: 12),
-                                          Text(l10n.settingsLevelInfo2),
-                                          const SizedBox(height: 12),
-                                          Text(l10n.settingsLevelInfo3),
-                                          const SizedBox(height: 12),
-                                          Text(l10n.settingsLevelInfo3),
-                                        ],
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child:
-                                              Text(l10n.settingsLevelInfoClose),
-                                        ),
-                                      ],
-                                    );
-                                  });
-                            },
-                            icon: const Icon(Icons.info),
-                          )
-                        ],
-                      ),
-
-                      leading: const Icon(Icons.image_search),
-                      titleAlignment: ListTileTitleAlignment.top,
-                      //dense: true,
-                      subtitle: Slider(
-                        value: searchLevel.valor.toDouble(),
-                        min: 0,
-                        max: 2,
-                        divisions: 2,
-                        label: searchLevel.name.toUpperCase(),
-                        onChanged: (double value) {
-                          ref.read(settingsProvider.notifier).setSearchLevel(
-                              SearchLevel.values.firstWhere(
-                                  (level) => level.valor == value.toInt()));
-                        },
-                      ),
-                      trailing: Text(searchLevel.name.toUpperCase()),
-                    ),
+                        title: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: l10n.settingsLevel),
+                              WidgetSpan(
+                                alignment: PlaceholderAlignment.middle,
+                                child: IconButton(
+                                  onPressed: () {
+                                    showSearchLevelInfo(context);
+                                  },
+                                  icon: const Icon(Icons.info, size: 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        leading: const Icon(Icons.manage_search),
+                        titleAlignment: ListTileTitleAlignment.titleHeight,
+                        //dense: true,
+                        subtitle: Slider(
+                          value: searchLevel.valor.toDouble(),
+                          min: 0,
+                          max: 2,
+                          divisions: 2,
+                          label: searchLevel.name.toUpperCase(),
+                          onChanged: (double value) {
+                            ref.read(settingsProvider.notifier).setSearchLevel(
+                                SearchLevel.values.firstWhere(
+                                    (level) => level.valor == value.toInt()));
+                          },
+                        ),
+                        trailing: Container(
+                          //width: 60,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: Text(
+                              searchLevel.name.substring(0, 3).toUpperCase(),
+                            ),
+                          ),
+                        )),
                     const Divider(height: 24),
                     ListTile(
                       title: Text(l10n.settingsRemoveCache),
                       leading: const Icon(Icons.collections),
-                      titleAlignment: ListTileTitleAlignment.top,
+                      titleAlignment: ListTileTitleAlignment.titleHeight,
                       //dense: true,
                       subtitle:
                           Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
@@ -292,7 +325,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ListTile(
                       title: const Text('Delete cache of shared images'),
                       leading: const Icon(Icons.collections),
-                      titleAlignment: ListTileTitleAlignment.top,
+                      titleAlignment: ListTileTitleAlignment.titleHeight,
                       subtitle:
                           Text('Size: ${formatBytes(bytes: sizeCacheShared)}'),
                       trailing: CircleAvatar(
