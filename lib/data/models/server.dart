@@ -62,6 +62,25 @@ enum Server {
 
   String? get apiKey => dotenv.maybeGet(key, fallback: null);
 
+  int getItemsPerPage(String searchLevel) {
+    if (this == openverse) {
+      return 20;
+    }
+    if (searchLevel == SearchLevel.max.name) {
+      return items;
+    }
+    if (searchLevel == SearchLevel.low.name) {
+      return 20;
+    }
+    return switch (this) {
+      unsplash => 30,
+      pexels => 50,
+      flickr => 100,
+      pixabay => 100,
+      openverse => 20,
+    };
+  }
+
   ServerApi getServerApi(QuerySent querySent) {
     return switch (this) {
       unsplash => UnsplashApi(querySent: querySent),

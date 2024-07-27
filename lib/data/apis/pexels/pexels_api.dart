@@ -16,7 +16,9 @@ class PexelsApi extends ServerApi {
   Map<String, dynamic> get queryParameters {
     Map<String, dynamic>? parameters = {'query': querySent.query};
     parameters['page'] = '${querySent.page}';
-    parameters['per_page'] = '${server.items}';
+    //parameters['per_page'] = '${server.items}';
+    parameters['per_page'] =
+        '${server.getItemsPerPage(querySent.searchLevel.name)}';
     if (querySent.filter?.color != null) {
       var hexColor =
           '#${querySent.filter?.color!.color.value.toRadixString(16).substring(2)}';

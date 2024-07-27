@@ -88,7 +88,7 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.querySent.query),
+        title: Text('${widget.querySent.query}: ${widget.photos.length}'),
         actions: [
           if (isViewGrid)
             IconButton(

@@ -20,7 +20,9 @@ class FlickrApi extends ServerApi {
     parameters['text'] = querySent.query;
     parameters['tags'] = querySent.query;
     parameters['page'] = '${querySent.page}';
-    parameters['per_page'] = '${server.items}';
+    //parameters['per_page'] = '${server.items}';
+    parameters['per_page'] =
+        '${server.getItemsPerPage(querySent.searchLevel.name)}';
     parameters['content_types'] = '0'; // photos
     parameters['media'] = 'photos';
     parameters['extras'] =

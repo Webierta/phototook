@@ -43,8 +43,7 @@ class FileUtil {
     );
 
     if (savePath == null) {
-      // NEW LOCALE: Proceso de descarga cancelado
-      showSnackBar(l10n.singleDownloadLinkNotFound);
+      showSnackBar(l10n.singleDownloadCancel);
       return;
     }
 

@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../data/models/query_sent.dart';
 import '../../../data/models/settings.dart';
 import '../../../utils/globals.dart' as globals;
 import '../../../utils/local_storage.dart';
@@ -30,6 +31,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
   late String lang;
   late bool isDarkTheme;
   late int albumColumns;
+  late SearchLevel searchLevel;
 
   @override
   void initState() {
@@ -101,6 +103,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
     isDarkTheme = ref.watch(settingsProvider).isDarkTheme;
     albumColumns = ref.watch(settingsProvider).albumColumns;
 
+    searchLevel = ref.watch(settingsProvider).searchLevel;
+
     return Container(
       decoration: BoxDecoration(
         gradient: StylesApp.gradient(Theme.of(context).colorScheme),
@@ -120,6 +124,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                   children: [
                     ListTile(
                       title: Text(l10n.settingsLanguage),
+                      leading: const Icon(Icons.translate),
                       //trailing: CircleAvatar(child: Text('EN')),
                       trailing: DropdownMenu<String>(
                         initialSelection: lang,
@@ -147,6 +152,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const Divider(height: 24),
                     SwitchListTile(
                       title: Text(l10n.settingsThemeLight),
+                      secondary: const Icon(Icons.brightness_6),
                       thumbIcon: WidgetStateProperty.all(
                         Icon(isDarkTheme ? Icons.dark_mode : Icons.light_mode),
                       ),
@@ -168,6 +174,9 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const Divider(height: 24),
                     ListTile(
                       title: Text(l10n.settingsNumberColumns),
+                      leading: const Icon(Icons.view_module),
+                      titleAlignment: ListTileTitleAlignment.top,
+                      //dense: true,
                       subtitle: Slider(
                         value: albumColumns.toDouble(),
                         min: 1,
@@ -200,7 +209,67 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const Divider(height: 24),
                     ListTile(
+                      title: Row(
+                        children: [
+                          const Text('Nivel de profundidad de la búsqueda'),
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(l10n.settingsLevel),
+                                      content: Column(
+                                        children: [
+                                          Text(l10n.settingsLevelInfo1),
+                                          const SizedBox(height: 12),
+                                          Text(l10n.settingsLevelInfo2),
+                                          const SizedBox(height: 12),
+                                          Text(l10n.settingsLevelInfo3),
+                                          const SizedBox(height: 12),
+                                          Text(l10n.settingsLevelInfo3),
+                                        ],
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child:
+                                              Text(l10n.settingsLevelInfoClose),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            icon: const Icon(Icons.info),
+                          )
+                        ],
+                      ),
+
+                      leading: const Icon(Icons.image_search),
+                      titleAlignment: ListTileTitleAlignment.top,
+                      //dense: true,
+                      subtitle: Slider(
+                        value: searchLevel.valor.toDouble(),
+                        min: 0,
+                        max: 2,
+                        divisions: 2,
+                        label: searchLevel.name.toUpperCase(),
+                        onChanged: (double value) {
+                          ref.read(settingsProvider.notifier).setSearchLevel(
+                              SearchLevel.values.firstWhere(
+                                  (level) => level.valor == value.toInt()));
+                        },
+                      ),
+                      trailing: Text(searchLevel.name.toUpperCase()),
+                    ),
+                    const Divider(height: 24),
+                    ListTile(
                       title: Text(l10n.settingsRemoveCache),
+                      leading: const Icon(Icons.collections),
+                      titleAlignment: ListTileTitleAlignment.top,
+                      //dense: true,
                       subtitle:
                           Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
                       trailing: CircleAvatar(
@@ -222,6 +291,8 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const Divider(height: 24),
                     ListTile(
                       title: const Text('Delete cache of shared images'),
+                      leading: const Icon(Icons.collections),
+                      titleAlignment: ListTileTitleAlignment.top,
                       subtitle:
                           Text('Size: ${formatBytes(bytes: sizeCacheShared)}'),
                       trailing: CircleAvatar(
@@ -256,7 +327,7 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
               child: FractionallySizedBox(
                 widthFactor: 0.8,
                 child: Row(
@@ -267,12 +338,14 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                           sharedPrefs.lang = lang;
                           sharedPrefs.isDarkTheme = isDarkTheme;
                           sharedPrefs.albumColumns = albumColumns;
+                          sharedPrefs.searchLevel = searchLevel.name;
                           ref
                               .watch(settingsProvider.notifier)
                               .setSettings(Settings(
                                 idioma: lang,
                                 isDarkTheme: isDarkTheme,
                                 albumColumns: albumColumns,
+                                searchLevel: searchLevel,
                               ));
                           globals.scaffoldMessengerKey.currentState!
                               .showSnackBar(

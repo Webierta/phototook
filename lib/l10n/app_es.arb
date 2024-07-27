@@ -34,6 +34,12 @@
     "settingsSize": "Tamaño",
     "settingsSavedSettings": "Ajustes guardados",
     "settingsSave": "Guardar ajustes",
+    "settingsLevel": "Nivel de profundidad de la búsqueda",
+    "settingsLevelInfo1": "El nivel de profundidad determina el número máximo de imágenes por página. Esto influye sobre el tiempo de carga (junto a otros factores, como la conexión a internet y el tamaño de las imágenes). También puede afectar al número de solicitudes enviadas al servidor.",
+    "settingsLevelInfo2": "El nivel bajo obtiene más rápidamente las imágenes (máximo 100 por página) pero requiere más solicitudes para obtener más resultados.",
+    "settingsLevelInfo3": "El nivel máximo puede tardar más tiempo en cargar, pero se obtienen más imágenes en una sola solicitud (todas las soportadas por cada plataforma, más de 800 en total).",
+    "settingsLevelInfo4": "El nivel medio es más equilibrado, obteniendo un máximo de 300 imágenes por página.",
+    "settingsLevelInfoClose": "Cerrar",
 
     "singleFavoriteAdd": "Favorito añadido",
     "singleFavoriteDeleted": "Favorito eliminado",
@@ -47,6 +53,7 @@
     "singleGetError": "Ha ocurrido un error obteniendo las fotos",
     "singleNoTitle": "Sin título",
     "singleFiletypeError": "Proceso abortado: imposible determinar el formato de la imagen",
+    "singleDownloadCancel": "Proceso de descarga cancelado",
 
     "cardViewError": "Se ha producido un error obteniendo las fotos",
 

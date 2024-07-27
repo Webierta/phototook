@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/models/query_sent.dart';
 import '../../data/models/settings.dart';
 
 class SettingsNotifier extends StateNotifier<Settings> {
@@ -31,6 +32,11 @@ class SettingsNotifier extends StateNotifier<Settings> {
       albumColumns = 1;
     }
     final newState = state.copy(albumColumns: albumColumns);
+    state = newState;
+  }
+
+  void setSearchLevel(SearchLevel level) {
+    final newState = state.copy(searchLevel: level);
     state = newState;
   }
 }

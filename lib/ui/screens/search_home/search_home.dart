@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:phototook/ui/states/settings_provider.dart';
 
 import '../../../data/models/filter_request.dart';
 import '../../../data/models/photo.dart';
@@ -58,6 +59,9 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
     }
     setState(() => isLoading = true);
     final querySent = QuerySent(query: query, page: 1, filter: filter);
+    var searchLevel = ref.watch(settingsProvider).searchLevel;
+    querySent.searchLevel = searchLevel;
+
     await RequestApi(querySent: querySent)
         .searchPhotos
         .then((List<Photo> fotos) async {

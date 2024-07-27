@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
+import '../../utils/local_storage.dart';
 import '../apis/flickr/flickr_api.dart';
 import '../apis/flickr/flickr_photos.dart';
 import '../apis/openverse/openverse_api.dart';
@@ -22,7 +23,18 @@ class RequestApi {
   final QuerySent querySent;
   List<Photo> totalPhotos = [];
   late Client client;
+  String searchLevel = SearchLevel.medium.name;
+
   RequestApi({required this.querySent}) : client = Client();
+  /* RequestApi({required this.querySent}) {
+    client = Client();
+  } */
+
+  Future<String> getStorageSearchLevel() async {
+    final LocalStorage sharedPrefs = LocalStorage();
+    await sharedPrefs.init();
+    return sharedPrefs.searchLevel;
+  }
 
   Future<List<Photo>> get searchPhotos async {
     if (querySent.photo?.id != null) {

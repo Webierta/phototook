@@ -17,7 +17,9 @@ class PixabayApi extends ServerApi {
       'q': querySent.query
     };
     parameters['page'] = '${querySent.page}';
-    parameters['per_page'] = '${server.items}';
+    //parameters['per_page'] = '${server.items}';
+    parameters['per_page'] =
+        '${server.getItemsPerPage(querySent.searchLevel.name)}';
     parameters['image_type'] = 'photo';
 
     if (querySent.photo?.id != null) {
