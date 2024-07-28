@@ -61,10 +61,6 @@ class BottomSheetFilterState extends ConsumerState<BottomSheetFilter> {
                         child: Container(
                           padding: EdgeInsets.zero,
                           decoration: BoxDecoration(
-                            /* border: Border.all(
-                              color: Theme.of(context).colorScheme.secondary,
-                              width: 0,
-                            ), */
                             borderRadius: const BorderRadius.all(
                               Radius.circular(8.0),
                             ),

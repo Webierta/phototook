@@ -3,12 +3,9 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:phototook/utils/consts.dart';
 
 class MarkdownStyle {
-  //final BuildContext context;
   final ThemeData theme;
-
   MarkdownStyle({required this.theme});
 
-  //static
   MarkdownStyleSheet get buildMarkdownStyleSheet {
     return MarkdownStyleSheet.fromTheme(theme).copyWith(
       h1: const TextStyle(

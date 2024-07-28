@@ -26,9 +26,6 @@ class RequestApi {
   String searchLevel = SearchLevel.medium.name;
 
   RequestApi({required this.querySent}) : client = Client();
-  /* RequestApi({required this.querySent}) {
-    client = Client();
-  } */
 
   Future<String> getStorageSearchLevel() async {
     final LocalStorage sharedPrefs = LocalStorage();
@@ -70,7 +67,6 @@ class RequestApi {
   }
 
   Future<List<Photo>> getPhotosFromServer(ServerApi serverApi) async {
-    //print('START ${serverApi.server.name}');
     List<Photo> photos = [];
     if (serverApi.authorization == false) {
       return photos;
@@ -85,7 +81,6 @@ class RequestApi {
       return photos;
     }
     if (response.statusCode != 200) {
-      //print('error status code in ${serverApi.server}');
       return photos;
     }
     try {
@@ -103,7 +98,6 @@ class RequestApi {
       };
       photos.addAll(serverPhotos);
     } catch (e) {
-      //print(e.toString());
       return photos;
     }
     return photos;

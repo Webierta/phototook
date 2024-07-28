@@ -34,32 +34,8 @@ class CachedImage extends StatelessWidget {
           ],
         );
       },
-      /* errorBuilder: (context, exception, stacktrace) {
-        return const Icon(Icons.image_not_supported);
-      }, */
       errorBuilder: (context, exception, stacktrace) {
         return const NoImages(message: 'Image not found');
-        /* return LayoutBuilder(builder: (context, constraint) {
-          return SizedBox(
-            height: constraint.biggest.height,
-            child: Column(
-              children: [
-                const Spacer(),
-                Text(
-                  'Image not found',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                Expanded(
-                  child: Icon(
-                    Icons.image_not_supported,
-                    size: constraint.maxHeight / 2,
-                  ),
-                ),
-                const Spacer(flex: 2),
-              ],
-            ),
-          );
-        }); */
       },
     );
   }

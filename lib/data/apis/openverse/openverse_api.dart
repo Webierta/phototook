@@ -22,7 +22,6 @@ class OpenverseApi extends ServerApi {
     Map<String, dynamic>? parameters = {'q': querySent.query};
     parameters['page'] = '${querySent.page}';
     //parameters['page_size'] = '${server.items}';
-    //parameters['page_size'] = '${server.items}';
     parameters['page_size'] =
         '${server.getItemsPerPage(querySent.searchLevel.name)}';
     parameters['category'] = 'photograph';

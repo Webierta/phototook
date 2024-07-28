@@ -108,11 +108,11 @@ class FileUtil {
       return;
     }
 
-    File? file;
     if (Platform.isAndroid) {
       final directory = await getApplicationCacheDirectory();
       final savePath = '${directory.path}/$fileName';
       final Client client = Client();
+      File? file;
       try {
         final response = await client.get(Uri.parse(photo.linkDownload!));
         if (response.statusCode == 200) {
@@ -123,7 +123,7 @@ class FileUtil {
             //text: l10n.singleGreatPicture(appName),
             text: fileName,
           );
-          file.delete();
+          //file.delete();
         } else {
           showSnackBar(l10n.singleServerFailed);
           return;
@@ -133,6 +133,7 @@ class FileUtil {
         return;
       } finally {
         client.close();
+        file?.delete();
       }
     } else {
       await Share.share(

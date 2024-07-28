@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../data/models/photo.dart';
 import '../../data/models/server.dart';
 import '../../utils/consts.dart';
-import '../../utils/globals.dart' as globals;
+import '../../utils/globals.dart';
 
 enum InfoAttribute { author, link, title, description, size, license, tags }
 
@@ -27,7 +27,8 @@ class ShowInfo extends StatelessWidget {
     Uri uri =
         Uri.parse(photo.server == Server.unsplash ? '$url$utmParameters' : url);
     if (!await launchUrl(uri)) {
-      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+      scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(content: Text('Could not launch $url')),
       );
     }

@@ -7,12 +7,14 @@ import 'package:path_provider/path_provider.dart';
 
 import 'data/models/query_sent.dart';
 import 'data/models/settings.dart';
+import 'ui/screens/about/about_screen.dart';
+import 'ui/screens/favorites/favorites_screen.dart';
 import 'ui/screens/search_home/search_home.dart';
+import 'ui/screens/settings/settings_screen.dart';
 import 'ui/screens/splash/splash_screen.dart';
 import 'ui/states/settings_provider.dart';
 import 'ui/styles/theme_app.dart';
 import 'utils/consts.dart';
-import 'utils/globals.dart' as globals;
 import 'utils/globals.dart';
 import 'utils/local_storage.dart';
 
@@ -65,8 +67,8 @@ class MainAppState extends ConsumerState<MainApp> {
     return MaterialApp(
       title: appName,
       debugShowCheckedModeBanner: false,
-      // KEYS
-      scaffoldMessengerKey: globals.scaffoldMessengerKey,
+      // GLOBALS KEYS
+      scaffoldMessengerKey: scaffoldMessengerKey,
       navigatorKey: navigatorKey,
       // THEME
       themeMode: settings.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
@@ -81,8 +83,12 @@ class MainAppState extends ConsumerState<MainApp> {
       routes: <String, WidgetBuilder>{
         '/splash': (context) => const SplashScreen(),
         '/home': (context) => const SearchHomeScreen(),
-        //'/single_photo': (context) => const SinglePhotoScreen(),
-        //'/settings': (BuildContext context) => const SettingScreen(),
+        '/about': (context) => const AboutScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/favorites': (context) => const FavoritesScreen(),
+        // album
+        // single photo
+        // zoom photo
       },
     );
   }

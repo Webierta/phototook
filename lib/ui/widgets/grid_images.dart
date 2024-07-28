@@ -11,7 +11,12 @@ import 'cached_image.dart';
 
 class GridImages extends ConsumerStatefulWidget {
   final List<Photo> photos;
-  const GridImages({super.key, required this.photos});
+  final bool? isFavorites;
+  const GridImages({
+    super.key,
+    required this.photos,
+    this.isFavorites = false,
+  });
 
   @override
   GridImagesState createState() => GridImagesState();
@@ -45,10 +50,10 @@ class GridImagesState extends ConsumerState<GridImages> {
   @override
   Widget build(BuildContext context) {
     crossAxisCount = ref.watch(gridColumnsProvider);
-    //crossAxisCount = ref.watch(settingsProvider).albumColumns;
     List<Photo> photos = widget.photos;
     final orientation = ref.watch(filterProvider).orientation;
-    if (orientation != null) {
+
+    if (widget.isFavorites != true && orientation != null) {
       aspectRatio = switch (orientation) {
         OrientationFilter.landscape => 1.8,
         OrientationFilter.portrait => 0.8,

@@ -9,7 +9,7 @@ import '../../../data/models/photo.dart';
 import '../../../data/models/query_sent.dart';
 import '../../../data/models/request_api.dart';
 import '../../../utils/file_util.dart';
-import '../../../utils/globals.dart' as globals;
+import '../../../utils/globals.dart';
 import '../../../utils/local_storage.dart';
 import '../../states/filter_provider.dart';
 import '../../widgets/cached_image.dart';
@@ -28,15 +28,13 @@ class SinglePhotoScreen extends ConsumerStatefulWidget {
 
 class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
   late Photo photo;
-
   bool isLoading = false;
   bool isFavorite = false;
   final LocalStorage sharedPrefs = LocalStorage();
-  //late AppLocalizations l10n;
+
   @override
   void initState() {
     photo = widget.photo;
-    //l10n = AppLocalizations.of(navigatorKey.currentContext!)!;
     loadSharedPrefs();
     checkFavorite();
     super.initState();
@@ -50,8 +48,6 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     Favorite favorite = Favorite.fromPhoto(photo);
     Map<String, dynamic> favoriteJson = favorite.toJson();
     final String favoriteEncode = jsonEncode(favoriteJson);
-    //final LocalStorage sharedPrefs = LocalStorage();
-    //await sharedPrefs.init();
     List<String> listaFavoritos = sharedPrefs.favoritesPhotos;
     if (listaFavoritos.contains(favoriteEncode)) {
       setState(() => isFavorite = true);
@@ -67,21 +63,21 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
     Map<String, dynamic> favoriteJson = favorite.toJson();
     final String favoriteEncode = jsonEncode(favoriteJson);
 
-    //final LocalStorage sharedPrefs = LocalStorage();
-    //await sharedPrefs.init();
     List<String> listaFavoritos = sharedPrefs.favoritesPhotos;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (!listaFavoritos.contains(favoriteEncode)) {
       listaFavoritos.add(favoriteEncode);
       sharedPrefs.favoritesPhotos = listaFavoritos;
 
-      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+      scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(content: Text(l10n.singleFavoriteAdd)),
       );
     } else {
       listaFavoritos.remove(favoriteEncode);
       sharedPrefs.favoritesPhotos = listaFavoritos;
-      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+      scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(content: Text(l10n.singleFavoriteDeleted)),
       );
     }
@@ -136,7 +132,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
             ModalRoute.withName('/home')))
         .catchError((onError) {
       final AppLocalizations l10n = AppLocalizations.of(context)!;
-      return globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      return scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(content: Text(l10n.singleGetError)),
       );
     }).whenComplete(() {
@@ -149,13 +145,10 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    //l10n = AppLocalizations.of(navigatorKey.currentContext!)!;
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
-    //
-    // Photo photo = widget.photo;
-    //
+
     return Stack(
       children: [
         Scaffold(
@@ -228,10 +221,8 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               const SizedBox(width: 12),
               FloatingActionButton.small(
                 heroTag: null,
-                //onPressed: downloadImage,
                 onPressed: () {
                   FileUtil.download(photo);
-                  //FileUtil(photo: photo).download();
                 },
                 shape: const CircleBorder(),
                 child: const Icon(Icons.download),
@@ -239,7 +230,6 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               const SizedBox(width: 12),
               FloatingActionButton.small(
                 heroTag: null,
-                //onPressed: shareImage,
                 onPressed: () {
                   FileUtil.shared(photo);
                 },

@@ -110,7 +110,7 @@ class FavoritesScreenState extends ConsumerState<FavoritesScreen> {
       ),
       body: photos.isNotEmpty
           ? isViewGrid
-              ? GridImages(photos: photos)
+              ? GridImages(photos: photos, isFavorites: true)
               : CardView(photos: photos)
           : NoImages(message: l10n.favoritesNoImages),
     );

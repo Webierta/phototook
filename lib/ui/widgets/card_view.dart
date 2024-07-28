@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/photo.dart';
 import '../../data/models/query_sent.dart';
 import '../../data/models/request_api.dart';
-import '../../utils/globals.dart' as globals;
+import '../../utils/globals.dart';
 import '../screens/album/album_screen.dart';
 import '../screens/single_photo/single_photo_screen.dart';
 import '../states/filter_provider.dart';
@@ -40,7 +40,8 @@ class CardViewState extends ConsumerState<CardView> {
             ModalRoute.withName('/home')))
         .catchError((onError) {
       final AppLocalizations l10n = AppLocalizations.of(context)!;
-      return globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      // scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+      return scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(content: Text(l10n.cardViewError)),
       );
     }).whenComplete(() {

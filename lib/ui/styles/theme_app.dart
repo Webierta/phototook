@@ -11,7 +11,6 @@ class ThemeApp {
       colorScheme: colorScheme,
       //scaffoldBackgroundColor: Colors.transparent,
       appBarTheme: const AppBarTheme(color: Colors.transparent),
-      //textTheme: TextTheme(),
       fontFamily: 'VictorMono',
       /* textTheme: const TextTheme(
         headlineLarge: TextStyle(

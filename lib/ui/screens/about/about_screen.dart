@@ -140,13 +140,25 @@ const String authorBlock = """
 const String attributions = """
 ## Attributions
 
+### Image sources:
+
+* [Unsplash](https://unsplash.com/).
+
+* [Pexels](https://www.pexels.com).
+
+* [Flickr](https://www.flickr.com).
+
+* [Pixabay](https://pixabay.com/).
+
+* [Openverse](https://openverse.org).
+
 ### Images:
 
-* Home screen image of [Lisa Fotios](https://www.pexels.com/es-es/foto/persona-con-foto-de-un-solo-arbol-durante-el-dia-1252983/) on Pexels.
+* Home screen image of [Lisa Fotios](https://www.pexels.com/es-es/foto/persona-con-foto-de-un-solo-arbol-durante-el-dia-1252983/) on Pexels. Free for use under the [Pexels License](https://www.pexels.com/license/).
 
-* GIF of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613).
+* GIF of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613) on [Pixabay](https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6613). Free for use under the Pixabay [Content License](https://pixabay.com/service/license-summary/).
 
-* GIF of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592) on [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592).
+* GIF of [David Montero](https://pixabay.com/es/users/editiox-6398285/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592) on [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=6592). Free for use under the Pixabay [Content License](https://pixabay.com/service/license-summary/).
 
 ### Fonts:
 

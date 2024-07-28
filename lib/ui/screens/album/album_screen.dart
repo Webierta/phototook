@@ -76,8 +76,6 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
 
   void changeCrossAxisCount() {
     ref.read(gridColumnsProvider.notifier).change();
-    //int albumColumns = ref.watch(settingsProvider).albumColumns + 1;
-    //ref.read(settingsProvider.notifier).setAlbumColumns(albumColumns);
   }
 
   @override
@@ -114,9 +112,9 @@ class AlbumScreenState extends ConsumerState<AlbumScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(width: 3.0),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(10.0)),
-                      //color: Colors.white,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     child: OverflowBar(

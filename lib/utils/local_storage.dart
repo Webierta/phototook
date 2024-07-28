@@ -2,18 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/models/query_sent.dart';
 
-//const String keyLang = 'keyLang';
-//const String keyDarkTheme = 'keyDarkTheme';
-//const String keyAlbumColumns = 'keyAlbumColumns';
-//const String keyFavoritesPhotos = 'keyFavoritesPhotos';
-
 class LocalStorage {
   static SharedPreferences? _sharedPrefs;
   static const String _lang = 'keyLang';
   static const String _isDarkTheme = 'keyDarkTheme';
   static const String _albumColumns = 'keyAlbumColumns';
   static const String _favoritesPhotos = 'keyFavoritesPhotos';
-  //static const String _itemsPerPage = 'keyItemsPerPage';
   static const String _searchLevel = 'keySearchLevel';
 
   init() async {
@@ -32,12 +26,8 @@ class LocalStorage {
   List<String> get favoritesPhotos =>
       _sharedPrefs?.getStringList(_favoritesPhotos) ?? [];
   set favoritesPhotos(List<String> value) {
-    //favoritesPhotos.add(value);
     _sharedPrefs?.setStringList(_favoritesPhotos, value);
   }
-
-  //int get itemsPerPage => _sharedPrefs?.getInt(_itemsPerPage) ?? 20;
-  //set itemsPerPage(int value) => _sharedPrefs?.setInt(_itemsPerPage, value);
 
   String get searchLevel =>
       _sharedPrefs?.getString(_searchLevel) ?? SearchLevel.medium.name;

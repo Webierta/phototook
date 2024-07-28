@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:phototook/ui/states/settings_provider.dart';
 
 import '../../../data/models/filter_request.dart';
 import '../../../data/models/photo.dart';
 import '../../../data/models/query_sent.dart';
 import '../../../data/models/request_api.dart';
 import '../../../utils/consts.dart';
-import '../../../utils/globals.dart' as globals;
+import '../../../utils/globals.dart';
 import '../../states/filter_provider.dart';
+import '../../states/settings_provider.dart';
 import '../../styles/styles_app.dart';
 import '../../widgets/pop_menu.dart';
 import '../album/album_screen.dart';
@@ -26,7 +26,6 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
   TextEditingController queryController = TextEditingController();
   String? topicSelect;
   bool isLoading = false;
-
   late Image imageMain;
 
   @override
@@ -74,7 +73,8 @@ class SearchHomeScreenState extends ConsumerState<SearchHomeScreen> {
     }).catchError((onError) {
       // REVISAR ??
       final AppLocalizations l10n = AppLocalizations.of(context)!;
-      globals.scaffoldMessengerKey.currentState!.showSnackBar(
+      scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
+      scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(content: Text(l10n.searchHomeError)),
       );
     }).whenComplete(() => setState(() => isLoading = false));

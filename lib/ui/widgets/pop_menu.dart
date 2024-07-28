@@ -6,10 +6,6 @@ import '../screens/favorites/favorites_screen.dart';
 import '../screens/settings/settings_screen.dart';
 
 enum OptionScreen {
-  /* favorites('Favorites', Icons.favorite, FavoritesScreen()),
-  settings('Settings', Icons.settings, SettingsScreen()),
-  about('About', Icons.code, AboutScreen()); */
-
   favorites(Icons.favorite, FavoritesScreen()),
   settings(Icons.settings, SettingsScreen()),
   about(Icons.code, AboutScreen());

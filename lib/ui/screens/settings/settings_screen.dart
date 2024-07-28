@@ -9,7 +9,6 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../data/models/query_sent.dart';
 import '../../../data/models/settings.dart';
-import '../../../utils/globals.dart' as globals;
 import '../../../utils/local_storage.dart';
 import '../../../utils/locales_app.dart';
 import '../../states/grid_columns_provider.dart';
@@ -24,10 +23,9 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class SettingsScreenState extends ConsumerState<SettingsScreen> {
   final LocalStorage sharedPrefs = LocalStorage();
-  //bool isDarkTheme = false;
-  //int albumColumns = 3;
+
   int sizeCacheImages = 0;
-  int sizeCacheShared = 0;
+  //int sizeCacheShared = 0;
   late String lang;
   late bool isDarkTheme;
   late int albumColumns;
@@ -48,16 +46,17 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
           setState(() {
             sizeCacheImages += File(file.path).lengthSync();
           });
-        } else {
+        }
+        /* else {
           setState(() {
             sizeCacheShared += File(file.path).lengthSync();
           });
-        }
+        } */
       }
     } else {
       setState(() {
         sizeCacheImages = 0;
-        sizeCacheShared = 0;
+        //sizeCacheShared = 0;
       });
     }
   }
@@ -71,89 +70,17 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> loadSharedPrefs() async {
     await sharedPrefs.init();
-    /* lang = sharedPrefs.lang;
-    isDarkTheme = sharedPrefs.isDarkTheme;
-    albumColumns = sharedPrefs.albumColumns; */
-
-    /* setState(() {
-      isDarkTheme = sharedPrefs.isDarkTheme;
-      albumColumns = sharedPrefs.albumColumns;
-    }); */
   }
 
   @override
   Widget build(BuildContext context) {
-    //bool isDarkTheme = sharedPrefs.isDarkTheme;
-    //int albumColumns = sharedPrefs.albumColumns;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    ScaffoldMessengerState sms = ScaffoldMessenger.of(context);
 
-    //var settings = ref.watch(settingsProvider);
-    /* String lang = settings.idioma ?? sharedPrefs.lang;
-    bool isDarkTheme = settings.isDarkTheme ?? sharedPrefs.isDarkTheme;
-    int albumColumns = settings.albumColumns ?? sharedPrefs.albumColumns; */
-    /* String lang = sharedPrefs.lang;
-    bool isDarkTheme = sharedPrefs.isDarkTheme;
-    int albumColumns = sharedPrefs.albumColumns; */
-    /* ref.read(settingsProvider.notifier).setSettings(Settings(
-          idioma: lang,
-          isDarkTheme: isDarkTheme,
-          albumColumns: albumColumns,
-        )); */
     lang = ref.watch(settingsProvider).idioma;
     isDarkTheme = ref.watch(settingsProvider).isDarkTheme;
     albumColumns = ref.watch(settingsProvider).albumColumns;
-
     searchLevel = ref.watch(settingsProvider).searchLevel;
-
-    void showSearchLevelInfo(BuildContext context) {
-      Navigator.of(context).push(MaterialPageRoute<void>(
-        fullscreenDialog: true,
-        builder: (BuildContext context) {
-          return SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                title: const Text('Info'),
-                leading: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
-                child: ListView(
-                  children: [
-                    Text(
-                      l10n.settingsLevel,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 14),
-                    Text(l10n.settingsLevelInfo1),
-                    const SizedBox(height: 14),
-                    Text(
-                      l10n.settingsLevelLow,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(l10n.settingsLevelInfo2),
-                    const SizedBox(height: 14),
-                    Text(
-                      l10n.settingsLevelMax,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(l10n.settingsLevelInfo3),
-                    const SizedBox(height: 14),
-                    Text(
-                      l10n.settingsLevelMedium,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(l10n.settingsLevelInfo4),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ));
-    }
 
     return Container(
       decoration: BoxDecoration(
@@ -161,93 +88,76 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text(l10n.settingsAppBar),
-          // Text(AppLocalizations.of(context)!.helloWorld),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text(l10n.settingsLanguage),
-                      leading: const Icon(Icons.translate),
-                      //trailing: CircleAvatar(child: Text('EN')),
-                      trailing: DropdownMenu<String>(
-                        initialSelection: lang,
-                        //textStyle: TextStyle(),
-                        onSelected: (String? value) {
-                          //ref.read(settingsProvider.notifier).setLang(value!);
-                          /* ref
-                              .read(settingsProvider.notifier)
-                              .setSettings(Settings(
-                                idioma: value!,
-                                isDarkTheme: isDarkTheme,
-                                albumColumns: albumColumns,
-                              )); */
-                          ref.read(settingsProvider.notifier).setLang(value!);
-                        },
-                        dropdownMenuEntries:
-                            LocalesApp.langCodes.map((String code) {
-                          return DropdownMenuEntry<String>(
-                            value: code,
-                            label: LocalesApp().langName(code),
-                          );
-                        }).toList(),
+        appBar: AppBar(title: Text(l10n.settingsAppBar)),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 2,
+                  ),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(l10n.settingsLanguage),
+                        leading: const Icon(Icons.translate),
+                        trailing: DropdownMenu<String>(
+                          initialSelection: lang,
+                          onSelected: (String? value) {
+                            ref.read(settingsProvider.notifier).setLang(value!);
+                          },
+                          dropdownMenuEntries:
+                              LocalesApp.langCodes.map((String code) {
+                            return DropdownMenuEntry<String>(
+                              value: code,
+                              label: LocalesApp().langName(code),
+                            );
+                          }).toList(),
+                        ),
                       ),
-                    ),
-                    const Divider(height: 24),
-                    SwitchListTile(
-                      title: Text(l10n.settingsThemeLight),
-                      secondary: const Icon(Icons.brightness_6),
-                      thumbIcon: WidgetStateProperty.all(
-                        Icon(isDarkTheme ? Icons.dark_mode : Icons.light_mode),
-                      ),
-                      value: isDarkTheme,
-                      onChanged: (val) {
-                        /* ref
-                            .read(settingsProvider.notifier)
-                            .setSettings(Settings(
-                              idioma: lang,
-                              isDarkTheme: val,
-                              albumColumns: albumColumns,
-                            )); */
-                        ref.read(settingsProvider.notifier).setTheme(val);
-                        /* setState(() {
-                          isDarkTheme = val;
-                        }); */
-                      },
-                    ),
-                    const Divider(height: 24),
-                    ListTile(
-                      title: Text(l10n.settingsNumberColumns),
-                      leading: const Icon(Icons.grid_on),
-                      titleAlignment: ListTileTitleAlignment.titleHeight,
-                      //dense: true,
-                      subtitle: Slider(
-                        value: albumColumns.toDouble(),
-                        min: 1,
-                        max: 6,
-                        divisions: 5,
-                        label: '$albumColumns',
-                        onChanged: (double value) {
-                          ref
-                              .read(gridColumnsProvider.notifier)
-                              .fit(value.toInt());
-                          ref
-                              .read(settingsProvider.notifier)
-                              .setAlbumColumns(value.toInt());
+                      const SizedBox(height: 12),
+                      SwitchListTile(
+                        title: Text(l10n.settingsThemeLight),
+                        secondary: const Icon(Icons.brightness_6),
+                        thumbIcon: WidgetStateProperty.all(
+                          Icon(
+                            isDarkTheme ? Icons.dark_mode : Icons.light_mode,
+                          ),
+                        ),
+                        value: isDarkTheme,
+                        onChanged: (val) {
+                          ref.read(settingsProvider.notifier).setTheme(val);
                         },
                       ),
-                      trailing: CircleAvatar(
-                        child: Text('$albumColumns'),
+                      const SizedBox(height: 12),
+                      ListTile(
+                        title: Text(l10n.settingsNumberColumns),
+                        leading: const Icon(Icons.grid_on),
+                        titleAlignment: ListTileTitleAlignment.titleHeight,
+                        //dense: true,
+                        subtitle: Slider(
+                          value: albumColumns.toDouble(),
+                          min: 1,
+                          max: 6,
+                          divisions: 5,
+                          label: '$albumColumns',
+                          onChanged: (double value) {
+                            ref
+                                .read(gridColumnsProvider.notifier)
+                                .fit(value.toInt());
+                            ref
+                                .read(settingsProvider.notifier)
+                                .setAlbumColumns(value.toInt());
+                          },
+                        ),
+                        trailing: CircleAvatar(
+                          child: Text('$albumColumns'),
+                        ),
                       ),
-                    ),
-                    const Divider(height: 24),
-                    ListTile(
+                      const SizedBox(height: 12),
+                      ListTile(
                         title: Text.rich(
                           TextSpan(
                             children: [
@@ -256,7 +166,13 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                                 alignment: PlaceholderAlignment.middle,
                                 child: IconButton(
                                   onPressed: () {
-                                    showSearchLevelInfo(context);
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        fullscreenDialog: true,
+                                        builder: (context) =>
+                                            const SearchLevelInfo(),
+                                      ),
+                                    );
                                   },
                                   icon: const Icon(Icons.info, size: 16),
                                 ),
@@ -280,7 +196,6 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                           },
                         ),
                         trailing: Container(
-                          //width: 60,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10,
                             vertical: 5,
@@ -296,107 +211,175 @@ class SettingsScreenState extends ConsumerState<SettingsScreen> {
                               searchLevel.name.substring(0, 3).toUpperCase(),
                             ),
                           ),
-                        )),
-                    const Divider(height: 24),
-                    ListTile(
-                      title: Text(l10n.settingsRemoveCache),
-                      leading: const Icon(Icons.collections),
-                      titleAlignment: ListTileTitleAlignment.titleHeight,
-                      //dense: true,
-                      subtitle:
-                          Text('Size: ${formatBytes(bytes: sizeCacheImages)}'),
-                      trailing: CircleAvatar(
-                        child: IconButton(
-                          onPressed: () async {
-                            await FastCachedImageConfig.clearAllCachedImages();
-                            setState(() => sizeCacheImages = 0);
-                            globals.scaffoldMessengerKey.currentState!
-                                .showSnackBar(
-                              SnackBar(
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      ListTile(
+                        title: Text(l10n.settingsRemoveCache),
+                        leading: const Icon(Icons.collections),
+                        titleAlignment: ListTileTitleAlignment.titleHeight,
+                        //dense: true,
+                        subtitle: Text(
+                            'Size: ${formatBytes(bytes: sizeCacheImages)}'),
+                        trailing: CircleAvatar(
+                          child: IconButton(
+                            onPressed: () async {
+                              await FastCachedImageConfig
+                                  .clearAllCachedImages();
+                              setState(() => sizeCacheImages = 0);
+                              sms.hideCurrentSnackBar();
+                              sms.showSnackBar(SnackBar(
                                 content: Text(l10n.settingsCacheRemoved),
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.delete_forever),
-                        ),
-                      ),
-                    ),
-                    const Divider(height: 24),
-                    ListTile(
-                      title: const Text('Delete cache of shared images'),
-                      leading: const Icon(Icons.collections),
-                      titleAlignment: ListTileTitleAlignment.titleHeight,
-                      subtitle:
-                          Text('Size: ${formatBytes(bytes: sizeCacheShared)}'),
-                      trailing: CircleAvatar(
-                        child: IconButton(
-                          onPressed: () async {
-                            final cacheDir =
-                                await getApplicationCacheDirectory();
-                            if (cacheDir.existsSync()) {
-                              //cacheDir.deleteSync(recursive: true);
-                              for (var file in cacheDir.listSync()) {
-                                if (!file.path.endsWith('.hive') &&
-                                    !file.path.endsWith('.lock')) {
-                                  file.delete();
-                                }
-                              }
-                              setState(() => sizeCacheShared = 0);
-                            }
-                            //cacheDir.create();
-                            globals.scaffoldMessengerKey.currentState!
-                                .showSnackBar(
-                              const SnackBar(
-                                content: Text('Cache of shared images deleted'),
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.delete_forever),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-              child: FractionallySizedBox(
-                widthFactor: 0.8,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: FilledButton(
-                        onPressed: () {
-                          sharedPrefs.lang = lang;
-                          sharedPrefs.isDarkTheme = isDarkTheme;
-                          sharedPrefs.albumColumns = albumColumns;
-                          sharedPrefs.searchLevel = searchLevel.name;
-                          ref
-                              .watch(settingsProvider.notifier)
-                              .setSettings(Settings(
-                                idioma: lang,
-                                isDarkTheme: isDarkTheme,
-                                albumColumns: albumColumns,
-                                searchLevel: searchLevel,
                               ));
-                          globals.scaffoldMessengerKey.currentState!
-                              .showSnackBar(
-                            SnackBar(content: Text(l10n.settingsSavedSettings)),
-                          );
-                        },
-                        child: Text(
-                          l10n.settingsSave,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontWeight: FontWeight.w900),
+                            },
+                            icon: const Icon(Icons.delete_forever),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      /* const Divider(height: 24),
+                      ListTile(
+                        title: const Text('Delete cache of shared images'),
+                        leading: const Icon(Icons.collections),
+                        titleAlignment: ListTileTitleAlignment.titleHeight,
+                        subtitle: Text(
+                            'Size: ${formatBytes(bytes: sizeCacheShared)}'),
+                        trailing: CircleAvatar(
+                          child: IconButton(
+                            onPressed: () async {
+                              final cacheDir =
+                                  await getApplicationCacheDirectory();
+                              if (cacheDir.existsSync()) {
+                                //cacheDir.deleteSync(recursive: true);
+                                for (var file in cacheDir.listSync()) {
+                                  if (!file.path.endsWith('.hive') &&
+                                      !file.path.endsWith('.lock')) {
+                                    file.delete();
+                                  }
+                                }
+                                setState(() => sizeCacheShared = 0);
+                              }
+                              //cacheDir.create();
+                              scaffoldMessengerKey.currentState!.showSnackBar(
+                                const SnackBar(
+                                  content:
+                                      Text('Cache of shared images deleted'),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.delete_forever),
+                          ),
+                        ),
+                      ), */
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              /*  Container(
+                color: Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withOpacity(0.3),
+                width: MediaQuery.of(context).size.width, */
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: FractionallySizedBox(
+                  widthFactor: 0.8,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: FilledButton(
+                          onPressed: () {
+                            sharedPrefs.lang = lang;
+                            sharedPrefs.isDarkTheme = isDarkTheme;
+                            sharedPrefs.albumColumns = albumColumns;
+                            sharedPrefs.searchLevel = searchLevel.name;
+                            ref
+                                .watch(settingsProvider.notifier)
+                                .setSettings(Settings(
+                                  idioma: lang,
+                                  isDarkTheme: isDarkTheme,
+                                  albumColumns: albumColumns,
+                                  searchLevel: searchLevel,
+                                ));
+                            //showSnackBar(l10n.settingsSavedSettings);
+                            /* scaffoldMessengerKey.currentState!.showSnackBar(
+                              SnackBar(
+                                content: Text(l10n.settingsSavedSettings),
+                              ),
+                            ); */
+                            sms.hideCurrentSnackBar();
+                            sms.showSnackBar(SnackBar(
+                              content: Text(l10n.settingsSavedSettings),
+                            ));
+                          },
+                          child: Text(
+                            l10n.settingsSave.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SearchLevelInfo extends StatelessWidget {
+  const SearchLevelInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    return Container(
+      decoration: BoxDecoration(
+        gradient: StylesApp.gradient(Theme.of(context).colorScheme),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text('Info'),
+          leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.all(18),
+            children: [
+              Text(
+                l10n.settingsLevel,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 14),
+              Text(l10n.settingsLevelInfo1),
+              const SizedBox(height: 14),
+              Text(
+                l10n.settingsLevelLow,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(l10n.settingsLevelInfo2),
+              const SizedBox(height: 14),
+              Text(
+                l10n.settingsLevelMax,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(l10n.settingsLevelInfo3),
+              const SizedBox(height: 14),
+              Text(
+                l10n.settingsLevelMedium,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(l10n.settingsLevelInfo4),
+            ],
+          ),
         ),
       ),
     );
