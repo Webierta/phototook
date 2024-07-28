@@ -3,7 +3,7 @@
 Este archivo registra y documenta los cambios más notables a lo largo del desarrollo del proyecto.
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.1.1]- 2024-07-28
 
 ### Fixed
 
@@ -58,7 +58,7 @@ All notable changes to this project will be documented in this file.
 - Alpha version.
 - Project start.
 
-[Unreleased]: https://github.com/Webierta/phototook/compare/v1.1.0...HEAD
+[1.1.1]: https://github.com/Webierta/phototook/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/Webierta/phototook/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Webierta/phototook/compare/v0.1.0...v1.0.0
 [0.1.0]: https://github.com/Webierta/phototook/releases/tag/v0.1.0
