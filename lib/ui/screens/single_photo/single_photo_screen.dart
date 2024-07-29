@@ -221,8 +221,13 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               const SizedBox(width: 12),
               FloatingActionButton.small(
                 heroTag: null,
-                onPressed: () {
-                  FileUtil.download(photo);
+                onPressed: () async {
+                  setState(() => isLoading = true);
+                  await FileUtil.download(photo).whenComplete(() {
+                    if (mounted) {
+                      setState(() => isLoading = false);
+                    }
+                  });
                 },
                 shape: const CircleBorder(),
                 child: const Icon(Icons.download),
@@ -231,6 +236,7 @@ class SinglePhotoScreenState extends ConsumerState<SinglePhotoScreen> {
               FloatingActionButton.small(
                 heroTag: null,
                 onPressed: () {
+                  // await ??
                   FileUtil.shared(photo);
                 },
                 shape: const CircleBorder(),

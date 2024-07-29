@@ -37,15 +37,16 @@ class FileUtil {
       showSnackBar(l10n.singleDownloadLinkNotFound);
       return;
     }
-    String? savePath = await FilePicker.platform.saveFile(
+
+    /* String? savePath = await FilePicker.platform.saveFile(
       dialogTitle: 'Please select an output file:',
-      fileName: fileName,
+      fileName: fileName,      
     );
 
     if (savePath == null) {
       showSnackBar(l10n.singleDownloadCancel);
       return;
-    }
+    } */
 
     String url = photo.linkDownload!;
     final Client client = Client();
@@ -81,8 +82,17 @@ class FileUtil {
       await client
           .get(Uri.parse(url))
           .timeout(const Duration(seconds: 5))
-          .then((response) {
+          .then((response) async {
         if (response.statusCode == 200) {
+          String? savePath = await FilePicker.platform.saveFile(
+            dialogTitle: 'Please select an output file:',
+            fileName: fileName,
+            bytes: response.bodyBytes,
+          );
+          if (savePath == null) {
+            showSnackBar(l10n.singleDownloadCancel);
+            return;
+          }
           File(savePath).writeAsBytes(response.bodyBytes);
           showSnackBar(l10n.singleDownloadedAt(savePath));
         } else {
